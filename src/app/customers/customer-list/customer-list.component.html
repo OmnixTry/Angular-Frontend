@@ -1,0 +1,20 @@
+<div class="row">
+    <div class="col-xs-12">
+        <button class="btn btn-success">New Customer</button>
+    </div>
+</div>
+<hr>
+<div class="row">
+    <div class="col-xs-12">
+        <a href="#" 
+        class="list-group-item clearfix"
+        *ngFor="let customer of customers">
+            <div class="pull-left">
+                <p class="list-group-item-heading">{{ customer.name }}</p>
+                <p class="list-group-item-text">{{ customer.address }}</p>
+                <p class="list-group-item-text">{{ customer.creationDate }}</p>
+            </div>
+        </a>
+    </div>
+</div>
+<app-customer-list-element></app-customer-list-element>

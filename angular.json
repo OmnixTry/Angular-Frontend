@@ -3,7 +3,7 @@
   "version": 1,
   "newProjectRoot": "projects",
   "projects": {
-    "Angular-Frontend": {
+    "FrontAngular": {
       "projectType": "application",
       "schematics": {
         "@schematics/angular:application": {
@@ -17,7 +17,7 @@
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
           "options": {
-            "outputPath": "dist/Angular-Frontend",
+            "outputPath": "dist/FrontAngular",
             "index": "src/index.html",
             "main": "src/main.ts",
             "polyfills": "src/polyfills.ts",
@@ -28,7 +28,8 @@
               "src/assets"
             ],
             "styles": [
-              "src/styles.css"
+              "src/styles.css",
+              "node_modules/bootstrap/dist/css/bootstrap.min.css"
             ],
             "scripts": []
           },
@@ -65,18 +66,18 @@
         "serve": {
           "builder": "@angular-devkit/build-angular:dev-server",
           "options": {
-            "browserTarget": "Angular-Frontend:build"
+            "browserTarget": "FrontAngular:build"
           },
           "configurations": {
             "production": {
-              "browserTarget": "Angular-Frontend:build:production"
+              "browserTarget": "FrontAngular:build:production"
             }
           }
         },
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "browserTarget": "Angular-Frontend:build"
+            "browserTarget": "FrontAngular:build"
           }
         },
         "test": {
@@ -113,16 +114,16 @@
           "builder": "@angular-devkit/build-angular:protractor",
           "options": {
             "protractorConfig": "e2e/protractor.conf.js",
-            "devServerTarget": "Angular-Frontend:serve"
+            "devServerTarget": "FrontAngular:serve"
           },
           "configurations": {
             "production": {
-              "devServerTarget": "Angular-Frontend:serve:production"
+              "devServerTarget": "FrontAngular:serve:production"
             }
           }
         }
       }
     }
   },
-  "defaultProject": "Angular-Frontend"
+  "defaultProject": "FrontAngular"
 }
