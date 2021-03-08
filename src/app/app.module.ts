@@ -10,6 +10,10 @@ import { HeaderComponent } from './header/header.component';
 import { CustomerListElementComponent } from './customers/customer-list/customer-list-element/customer-list-element.component';
 import { CustomerService } from './shared/services/customer.service';
 import { ProductsComponent } from './products/products.component';
+import { ProductListComponent } from './products/product-list/product-list.component';
+import { ProductElementComponent } from './products/product-list/product-element/product-element.component';
+import { ProductService } from './shared/services/product.service';
+import { AddProductComponent } from './products/add-product/add-product.component';
 
 
 @NgModule({
@@ -20,14 +24,17 @@ import { ProductsComponent } from './products/products.component';
     CustomerAddComponent,
     HeaderComponent,
     CustomerListElementComponent,
-    ProductsComponent
+    ProductsComponent,
+    ProductListComponent,
+    ProductElementComponent,
+    AddProductComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     FormsModule
   ],
-  providers: [CustomerService],
+  providers: [CustomerService, ProductService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

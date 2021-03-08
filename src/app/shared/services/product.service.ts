@@ -61,4 +61,16 @@ export class ProductService {
       description: description,
     });
   }
+
+  getCollumns(): string[] {
+    return [
+      'productNumber',
+      'productName',
+      'createdDate',
+      'productCategory',
+      'availableQuantity',
+      'price',
+      'description',
+    ];
+  }
 }
