@@ -14,7 +14,14 @@ import { ProductListComponent } from './products/product-list/product-list.compo
 import { ProductElementComponent } from './products/product-list/product-element/product-element.component';
 import { ProductService } from './shared/services/product.service';
 import { AddProductComponent } from './products/add-product/add-product.component';
+import { RouterModule, Routes } from '@angular/router';
 
+const appRoutes : Routes = [
+  {path: 'customer', component: CustomersComponent},
+  {path: 'customer/add', component: CustomerAddComponent},
+  {path: 'product', component: ProductsComponent},
+  {path: 'product/add', component: AddProductComponent}
+]
 
 @NgModule({
   declarations: [
@@ -32,7 +39,8 @@ import { AddProductComponent } from './products/add-product/add-product.componen
   imports: [
     BrowserModule,
     AppRoutingModule,
-    FormsModule
+    FormsModule,
+    RouterModule.forRoot(appRoutes)
   ],
   providers: [CustomerService, ProductService],
   bootstrap: [AppComponent]
