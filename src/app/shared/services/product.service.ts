@@ -44,7 +44,6 @@ export class ProductService {
   }
 
   addProduct(
-    createdDate: Date,
     productName: string,
     productCategory: string,
     availableQuantity: number,
@@ -53,7 +52,7 @@ export class ProductService {
   ) {
     this._products.push({
       productNumber: 0,
-      createdDate: createdDate,
+      createdDate: new Date(),
       productName: productName,
       productCategory: productCategory,
       availableQuantity: availableQuantity,
@@ -72,5 +71,9 @@ export class ProductService {
       'price',
       'description',
     ];
+  }
+
+  deleteProduct(product: Product){
+    this.products.splice(this.products.indexOf(product), 1);
   }
 }

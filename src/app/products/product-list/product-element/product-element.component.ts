@@ -13,7 +13,11 @@ export class ProductElementComponent implements OnInit {
   @Input() product: any;
   @Input() columns?: string[];
 
-  constructor() {}
+  constructor(private productService: ProductService) {}
 
   ngOnInit(): void {}
+
+  onItemDelete(){
+    this.productService.deleteProduct(this.product);
+  }
 }

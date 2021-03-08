@@ -1,1 +1,15 @@
-<p>add-product works!</p>
+<h1>Add Customer</h1>
+<form action="">
+    <label for="sss">Name</label>
+    <input type="text" name="productName" id="" [(ngModel)]="productName" > <br>
+    <label for="sss">Category</label>
+    <input type="text" name="category" id="" [(ngModel)]="productCategory"> <br>
+    <label for="sss">Quantity</label>
+    <input type="text" name="availableQuantity" id="" [(ngModel)]="availableQuantity"><br>
+    <label for="sss">Price</label>
+    <input type="text" name="price" id="" [(ngModel)]="price"><br>
+    <label for="sss">Description</label>
+    <input type="textBlock" name="description" id="" [(ngModel)]="description"><br>
+    <button (click)="onProductAdd()">Add</button><br>
+</form>
+
