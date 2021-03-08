@@ -8,6 +8,9 @@ import { CustomerListComponent } from './customers/customer-list/customer-list.c
 import { CustomerAddComponent } from './customers/customer-add/customer-add.component';
 import { HeaderComponent } from './header/header.component';
 import { CustomerListElementComponent } from './customers/customer-list/customer-list-element/customer-list-element.component';
+import { CustomerService } from './shared/services/customer.service';
+import { ProductsComponent } from './products/products.component';
+
 
 @NgModule({
   declarations: [
@@ -16,14 +19,15 @@ import { CustomerListElementComponent } from './customers/customer-list/customer
     CustomerListComponent,
     CustomerAddComponent,
     HeaderComponent,
-    CustomerListElementComponent
+    CustomerListElementComponent,
+    ProductsComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     FormsModule
   ],
-  providers: [],
+  providers: [CustomerService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

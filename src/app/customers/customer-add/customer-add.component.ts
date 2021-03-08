@@ -1,5 +1,6 @@
 import { Component, Input, OnInit, Output } from '@angular/core';
-import { Customer } from '../customer.model';
+import { CustomerService } from 'src/app/shared/services/customer.service';
+import { Customer } from '../../shared/models/customer.model';
 
 @Component({
   selector: 'app-customer-add',
@@ -7,12 +8,19 @@ import { Customer } from '../customer.model';
   styleUrls: ['./customer-add.component.css']
 })
 export class CustomerAddComponent implements OnInit {
-  customer: Customer;
-  constructor() {
-      this.customer = new Customer('','',new Date());
-   }
+  name: string = '';
+  address: string = '';
+
+  constructor(private customerService: CustomerService) {
+    
+  }
 
   ngOnInit(): void {
   }
 
+  onCustomerAdd(){
+    this.customerService.addCustomer(this.name, this.address);
+  }
+
+  
 }
