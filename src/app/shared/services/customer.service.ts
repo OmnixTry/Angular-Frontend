@@ -7,7 +7,7 @@ export class CustomerService {
         {name: 'Cindy', address: 'Fine street', creationDate: new Date()},
     ];
 
-    addCustomer(name: string, address: string): void{
-        this.customers.push({name: name, address: address, creationDate:new Date()});
+    addCustomer(customer: Customer): void{
+        this.customers.push(customer);
     }
 }

@@ -6,6 +6,7 @@ export class Product{
     availableQuantity: number;
     price: number;
     description?: string = '';
+    size: string;
 
     constructor(productNumber: number,
         createdDate: Date,
@@ -13,7 +14,8 @@ export class Product{
         productCategory: string,
         availableQuantity: number,
         price: number,
-        description: string)
+        description: string,
+        size: string)
     {
         this.productNumber = productNumber;
         this.createdDate = createdDate;
@@ -22,5 +24,6 @@ export class Product{
         this.availableQuantity = availableQuantity;
         this.price = price;
         this.description = description;
+        this.size = size;
     }
 }

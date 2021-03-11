@@ -1,4 +1,36 @@
-<button routerLink="/product/add">Add Product</button>
+<h1>Products</h1>
+<div>
+  <table class="table table-bordered">
+    <thead>
+      <tr>
+        <td>ProductId</td>
+        <td>Product Name</td>
+        <td>Product Category</td>
+        <td>Product Size</td>
+        <td>Product Quantity</td>
+        <td>Product Price</td>
+        <td>Creation Date</td>
+        <td>Action</td>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let product of products">
+        <td><a [routerLink]="[product.productNumber]">{{product.productNumber}}</a></td>
+        <td>{{product.productName}}</td>
+        <td>{{product.productCategory}}</td>
+        <td>{{product.size}}</td>
+        <td>{{product.availableQuantity}}</td>
+        <td>{{product.price}}</td>
+        <td>{{product.createdDate}}</td>
+        <td><button (click)="onDeleteClicked(product.productNumber)">Delete</button></td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+
+
+<!-- <button routerLink="/product/add">Add Product</button>
 <table>
     <tr>
       <th *ngFor="let c of columns">{{c}}</th>
@@ -8,4 +40,4 @@
         [product]="ch" 
         [columns]="columns"></app-product-element>
     </tr>
-  </table>
+  </table> -->

@@ -1,3 +1,4 @@
+import { sanitizeIdentifier } from '@angular/compiler';
 import { Product } from '../models/product.model';
 
 export class ProductService {
@@ -10,6 +11,8 @@ export class ProductService {
       availableQuantity: 100,
       price: 10,
       description: 'funny onions',
+      size: 'Medium'
+      
     },
     {
       productNumber: 2,
@@ -18,6 +21,7 @@ export class ProductService {
       productCategory: 'Vegetables',
       availableQuantity: 120,
       price: 20,
+      size: 'Medium'
     },
     {
       productNumber: 3,
@@ -27,6 +31,7 @@ export class ProductService {
       availableQuantity: 150,
       price: 15,
       description: 'yet another product',
+      size: 'Medium'
     },
     {
       productNumber: 4,
@@ -36,6 +41,7 @@ export class ProductService {
       availableQuantity: 1000,
       price: 100,
       description: 'Nice drincc',
+      size: 'Medium'
     },
   ];
 
@@ -48,7 +54,8 @@ export class ProductService {
     productCategory: string,
     availableQuantity: number,
     price: number,
-    description: string
+    description: string,
+    size: string
   ) {
     this._products.push({
       productNumber: 0,
@@ -58,6 +65,7 @@ export class ProductService {
       availableQuantity: availableQuantity,
       price: price,
       description: description,
+      size: size,
     });
   }
 
@@ -73,7 +81,8 @@ export class ProductService {
     ];
   }
 
-  deleteProduct(product: Product){
-    this.products.splice(this.products.indexOf(product), 1);
+  deleteProduct(productNumber: number){
+    const index = this.products.findIndex(el => { return el.productNumber === productNumber})
+    this.products.splice(index, 1);
   }
 }

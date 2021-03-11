@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { ProductService } from 'src/app/shared/services/product.service';
 
 @Component({
@@ -12,18 +13,26 @@ export class AddProductComponent implements OnInit {
   availableQuantity: number = 0;
   price: number = 0;
   description: string = '';
+  size: string='';
 
-  constructor(private productService: ProductService) {}
 
-  ngOnInit(): void {}
+  newProductForm: FormGroup;
 
-  onProductAdd() {
-    this.productService.addProduct(
-      this.productName,
-      this.productCategory,
-      this.availableQuantity,
-      this.price,
-      this.description
-    );
+  constructor(private productService: ProductService) {
+    this.newProductForm = new FormGroup({
+      'productName' : new FormControl(null, [Validators.required]),
+      'category' : new FormControl(null, [Validators.required]),
+      'availableQuantity': new FormControl(null, [Validators.required, Validators.min(1)]),
+      'price': new FormControl(null, [Validators.required, Validators.min(1)]),
+      'description': new FormControl(null)
+    });
+  }
+
+  ngOnInit(): void {
+   
+  }
+
+  onSubmit() {
+    console.log(this.newProductForm);
   }
 }

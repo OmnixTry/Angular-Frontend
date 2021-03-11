@@ -20,4 +20,8 @@ export class ProductListComponent implements OnInit {
   ngOnInit(): void {
   }
 
+  onDeleteClicked(productNumber: number){
+    console.log(productNumber);
+    this.productService.deleteProduct(productNumber)
+  }
 }

@@ -1,4 +1,25 @@
-<div class="row">
+<h1>Customers</h1>
+<table class="table table-bordered">
+    <thead>
+        <tr>
+            <td>Customer Name</td>
+            <td>Address</td>
+            <td>Total Order Cost</td>
+            <td>Orders count</td>
+        </tr>        
+    </thead>
+    <tbody>
+        <tr *ngFor="let customer of customers">
+            <td>{{ customer.name}}</td>
+            <td>{{ customer.address }}</td>
+            <td>TBA</td>
+            <td>TBA</td>
+        </tr>
+    </tbody>
+</table>
+
+
+<!-- <div class="row">
     
 </div>
 <hr>
@@ -8,4 +29,4 @@
         *ngFor="let customerElem of customers"
         [customer]="customerElem"></app-customer-list-element>
     </div>
-</div>
+</div> -->

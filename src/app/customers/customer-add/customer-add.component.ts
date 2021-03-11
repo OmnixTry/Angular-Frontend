@@ -1,4 +1,5 @@
-import { Component, Input, OnInit, Output } from '@angular/core';
+import { Component, Input, OnInit, Output, ViewChild } from '@angular/core';
+import { NgForm } from '@angular/forms';
 import { CustomerService } from 'src/app/shared/services/customer.service';
 import { Customer } from '../../shared/models/customer.model';
 
@@ -8,18 +9,23 @@ import { Customer } from '../../shared/models/customer.model';
   styleUrls: ['./customer-add.component.css']
 })
 export class CustomerAddComponent implements OnInit {
-  name: string = '';
-  address: string = '';
+  @ViewChild('custForm') creationForm?: NgForm;
+  creationDatee:Date;
 
   constructor(private customerService: CustomerService) {
-    
+    this.creationDatee = new Date();
   }
 
   ngOnInit(): void {
+    
   }
 
-  onCustomerAdd(){
-    this.customerService.addCustomer(this.name, this.address);
+  onSubmit(form: NgForm){
+    console.log(form);
+    this.customerService.addCustomer(<Customer>form.value);
+    if(this.creationForm){
+      this.creationForm.reset()
+    }
   }
 
   
