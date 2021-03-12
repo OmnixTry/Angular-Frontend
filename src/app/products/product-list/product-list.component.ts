@@ -14,6 +14,7 @@ export class ProductListComponent implements OnInit {
 
   constructor(private productService: ProductService) { 
     this.products = this.productService.products;
+    console.log(this.products);
     this.columns = productService.getCollumns();
   }
 

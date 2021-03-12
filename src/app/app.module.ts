@@ -19,6 +19,9 @@ import { OrdersComponent } from './orders/orders.component';
 import { OrderListComponent } from './orders/order-list/order-list.component';
 import { OrderService } from './shared/services/order.service';
 import { OrderViewComponent } from './orders/order-view/order-view.component';
+import { AddProductToOrderComponent } from './orders/add-product-to-order/add-product-to-order.component';
+import { AddOrderComponent } from './orders/add-order/add-order.component';
+import { NewOrderService } from './shared/services/new-order.service';
 
 const appRoutes : Routes = [
   {path: 'customer', component: CustomersComponent},
@@ -26,7 +29,10 @@ const appRoutes : Routes = [
   {path: 'product', component: ProductsComponent},
   {path: 'product/add', component: AddProductComponent},
   {path: 'order', component: OrdersComponent},
+  {path: 'order/add', component: AddOrderComponent},
+  {path: 'order/add/:id', component: AddProductToOrderComponent},
   {path: 'order/:id', component: OrderViewComponent},
+
 ]
 
 @NgModule({
@@ -43,7 +49,9 @@ const appRoutes : Routes = [
     AddProductComponent,
     OrdersComponent,
     OrderListComponent,
-    OrderViewComponent
+    OrderViewComponent,
+    AddProductToOrderComponent,
+    AddOrderComponent,
   ],
   imports: [
     BrowserModule,
@@ -52,7 +60,7 @@ const appRoutes : Routes = [
     RouterModule.forRoot(appRoutes),
     ReactiveFormsModule
   ],
-  providers: [CustomerService, ProductService, OrderService],
+  providers: [CustomerService, ProductService, OrderService, NewOrderService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

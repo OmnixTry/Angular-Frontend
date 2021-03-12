@@ -3,3 +3,23 @@
 <p>Customer: {{order?.customer?.name}}</p>
 <p>Status: {{order?.status}}</p>
 <p>Total Cost: {{order?.totalCost}}</p>
+<table>
+    <thead>
+        <td>Product Id</td>
+        <td>Product Name</td>
+        <td>Product Category</td>
+        <td>Product Size</td>
+        <td>Quantity</td>
+        <td>Price</td>
+    </thead>
+    <tbody>
+        <tr *ngFor="let product of order?.products">
+            <td>{{product.productNumber}}</td>
+            <td>{{product.productName}}</td>
+            <td>{{product.productCategory}}</td>
+            <td>{{product.size}}</td>
+            <td>{{product.availableQuantity}}</td>
+            <td>{{product.price}}</td>
+        </tr>
+    </tbody>
+</table>

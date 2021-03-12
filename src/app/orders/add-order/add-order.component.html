@@ -1,0 +1,56 @@
+<form [formGroup]="addOrderForm" (ngSubmit)="onSubmit()">
+    <label>
+        Order Date:
+    </label>
+    <input type="text" formControlName="createdDate">
+    <br>
+    <label>
+        Customer:
+    </label>
+    <select formControlName="customerId">
+        <option value={{customer.customerId}} *ngFor="let customer of customerService.customers">{{customer.name}}</option>
+    </select>
+    <br>
+    <label>
+        Status:
+    </label>
+    <select formControlName="status">
+        <option value={{status}} *ngFor="let status of orderService.status">{{status}}</option>
+    </select>
+    <br>
+    <p>Total Cost: {{totalCost}}</p>
+
+    <h1>Products</h1>
+<div>
+  <table class="table table-bordered">
+    <thead>
+      <tr>
+        <td>ProductId</td>
+        <td>Product Name</td>
+        <td>Product Category</td>
+        <td>Product Size</td>
+        <td>Product Quantity</td>
+        <td>Product Price</td>
+        <td>Creation Date</td>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let product of products">
+        <td><a [routerLink]="[product.productNumber]">{{product.productNumber}}</a></td>
+        <td>{{product.productName}}</td>
+        <td>{{product.productCategory}}</td>
+        <td>{{product.size}}</td>
+        <td>{{product.availableQuantity}}</td>
+        <td>{{product.price}}</td>
+        <td>{{product.createdDate}}</td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+    <label>Comment:</label><br>
+    <textarea cols="30" rows="10" formControlName="comment"></textarea>
+    <br>
+    <button type="submit">Save</button>
+    <button>Cancel</button>
+</form>

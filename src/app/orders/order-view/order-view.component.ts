@@ -13,10 +13,11 @@ export class OrderViewComponent implements OnInit {
   constructor(private orderService: OrderService,
     private router: ActivatedRoute) { 
     const orderNumber = <number>this.router.snapshot.params['id'];
-    order = this.orderService.getOrderById(orderNumber);
+    this.order = this.orderService.getOrderById(orderNumber);
   }
 
   ngOnInit(): void {
+    console.log(this.order)
   }
 
 }

@@ -56,7 +56,7 @@ import { ProductService } from "./product.service";
         }
     }
 
-    private substractQuantity(productNumber: number, quantity: number):Product|undefined {
+    substractQuantity(productNumber: number, quantity: number):Product|undefined {
         const product: Product = this.productService.getProductById(productNumber);
         if(product.availableQuantity>= quantity){
             product.availableQuantity -= quantity;
@@ -68,7 +68,15 @@ import { ProductService } from "./product.service";
     }
 
     getOrderById(orderNumber: number){
-        return this.orders.find((el)=> {return el.orderNumber === orderNumber;});
+        // WHY === doesn't work!!!!!!!
+        return this.orders.find((el)=> { return el.orderNumber == orderNumber;});
     }
 
+    get status(){
+        return ['New', 'Done'];
+    }
+
+    addOrder(newOrder: Order){
+        this.orders.push(newOrder);
+    }
 }
