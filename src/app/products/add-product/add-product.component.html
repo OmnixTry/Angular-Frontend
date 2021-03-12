@@ -6,8 +6,10 @@
     
 
     <label for="sss">Category</label>
-    <input type="text" name="category" id="" formControlName="category"> <br>
-
+    <select name="category"formControlName="category">
+        <option *ngFor="let category of categories" value={{category}}>{{category}}</option>
+    </select>
+    <br>
 
     <label for="sss">Quantity</label>
     <input type="text" name="availableQuantity" id="" formControlName="availableQuantity"><br>
@@ -24,6 +26,6 @@
     <input type="textBlock" name="description" id="" formControlName="description"><br>
 
 
-    <button type="submit">Add</button><br>
+    <button class="btn btn-primary" type="submit" [disabled]="!newProductForm.valid">Add</button><br>
 </form>
 

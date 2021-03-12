@@ -8,17 +8,14 @@ import { ProductService } from 'src/app/shared/services/product.service';
   styleUrls: ['./add-product.component.css'],
 })
 export class AddProductComponent implements OnInit {
-  productName: string = '';
-  productCategory: string = '';
-  availableQuantity: number = 0;
-  price: number = 0;
-  description: string = '';
-  size: string='';
+  categories: string[];
 
 
   newProductForm: FormGroup;
 
   constructor(private productService: ProductService) {
+    this.categories = productService.getCategories();
+    
     this.newProductForm = new FormGroup({
       'productName' : new FormControl(null, [Validators.required]),
       'category' : new FormControl(null, [Validators.required]),

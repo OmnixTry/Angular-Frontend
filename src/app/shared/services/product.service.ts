@@ -7,7 +7,7 @@ export class ProductService {
       productNumber: 1,
       createdDate: new Date(),
       productName: 'Onion',
-      productCategory: 'Vegetables',
+      productCategory: 'Vegetable',
       availableQuantity: 100,
       price: 10,
       description: 'funny onions',
@@ -18,7 +18,7 @@ export class ProductService {
       productNumber: 2,
       createdDate: new Date(),
       productName: 'Cucumber',
-      productCategory: 'Vegetables',
+      productCategory: 'Vegetable',
       availableQuantity: 120,
       price: 20,
       size: 'Medium'
@@ -27,7 +27,7 @@ export class ProductService {
       productNumber: 3,
       createdDate: new Date(),
       productName: 'Cabbage',
-      productCategory: 'Vegetables',
+      productCategory: 'Vegetable',
       availableQuantity: 150,
       price: 15,
       description: 'yet another product',
@@ -79,6 +79,10 @@ export class ProductService {
       'price',
       'description',
     ];
+  }
+
+  getCategories(): string[]{
+    return ['Beverage', 'Fruit', 'Vegetable']
   }
 
   deleteProduct(productNumber: number){
