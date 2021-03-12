@@ -15,6 +15,7 @@ import { ProductElementComponent } from './products/product-list/product-element
 import { ProductService } from './shared/services/product.service';
 import { AddProductComponent } from './products/add-product/add-product.component';
 import { RouterModule, Routes } from '@angular/router';
+import { OrdersComponent } from './orders/orders.component';
 
 const appRoutes : Routes = [
   {path: 'customer', component: CustomersComponent},
@@ -34,7 +35,8 @@ const appRoutes : Routes = [
     ProductsComponent,
     ProductListComponent,
     ProductElementComponent,
-    AddProductComponent
+    AddProductComponent,
+    OrdersComponent
   ],
   imports: [
     BrowserModule,

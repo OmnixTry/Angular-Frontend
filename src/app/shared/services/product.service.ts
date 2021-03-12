@@ -89,4 +89,9 @@ export class ProductService {
     const index = this.products.findIndex(el => { return el.productNumber === productNumber})
     this.products.splice(index, 1);
   }
+
+  getProductById(productNumber: number): Product{
+    const index = this.products.findIndex(el => { return el.productNumber === productNumber})
+    return this.products[index];
+  }
 }
