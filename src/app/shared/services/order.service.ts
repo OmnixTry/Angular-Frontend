@@ -4,7 +4,7 @@ import { Product } from "../models/product.model";
 import { CustomerService } from "./customer.service";
 import { ProductService } from "./product.service";
 
-@Injectable()export class orderService{
+@Injectable()export class OrderService{
     orders: Order[];
 
     constructor(public productService: ProductService,
@@ -35,10 +35,9 @@ import { ProductService } from "./product.service";
 
     addProductToOrder(orderNumber: number, productNumber: number, quantity: number): void{
         const product = this.substractQuantity(productNumber, quantity);
-        if(product){
-            this.getOrderById(orderNumber)
-            ?.products
-            .push({
+        const order = this.getOrderById(orderNumber);
+        if(product && order){
+            const addedProduct = {
                 productNumber: product.productNumber,
                 createdDate: product.createdDate,
                 productName: product.productName,
@@ -47,7 +46,13 @@ import { ProductService } from "./product.service";
                 price: product.price,
                 description: product.description,
                 size: product.size,
-            });
+            };
+            
+            order
+            .products
+            .push(addedProduct);
+            order.totalCost 
+                += addedProduct.price * addedProduct.availableQuantity;
         }
     }
 

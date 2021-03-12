@@ -1,0 +1,17 @@
+<table>
+    <thead>
+        <td>Order Number</td>
+        <td>Customer Name</td>
+        <td>Customer Addres</td>
+        <td>Status</td>
+    </thead>
+    <tbody>
+        <tr *ngFor="let order of orders">
+            <td><a [routerLink]="[order.orderNumber]">{{order.orderNumber}}</a></td>
+            <td>{{order.customer.name}}</td>
+            <td>{{order.customer.address}}</td>
+            <td>{{order.totalCost}}</td>
+            <td>{{order.status}}</td>
+        </tr>
+    </tbody>
+</table>
