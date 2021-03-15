@@ -85,6 +85,10 @@ export class ProductService {
     return ['Beverage', 'Fruit', 'Vegetable']
   }
 
+  getSizes(): string[]{
+    return ['Small', 'Medium', 'Large'];
+  }
+
   deleteProduct(productNumber: number){
     const index = this.products.findIndex(el => { return el.productNumber == productNumber})
     this.products.splice(index, 1);

@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormControl, FormGroup } from '@angular/forms';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Product } from 'src/app/shared/models/product.model';
 import { NewOrderService } from 'src/app/shared/services/new-order.service';
@@ -24,7 +24,7 @@ export class AddProductToOrderComponent implements OnInit {
     this.product = productService.getProductById(this.productId)
     
     this.productForm = new FormGroup({
-      'quantity': new FormControl()
+      'quantity': new FormControl(null, [Validators.required, Validators.min(1), Validators.max(this.product.availableQuantity)])
     });
   }
 

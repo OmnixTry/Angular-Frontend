@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
 import { Product } from 'src/app/shared/models/product.model';
 import { ProductService } from 'src/app/shared/services/product.service';
 
@@ -14,7 +15,8 @@ export class AddProductComponent implements OnInit {
 
   newProductForm: FormGroup;
 
-  constructor(private productService: ProductService) {
+  constructor(public productService: ProductService,
+    private router: Router) {
     this.categories = productService.getCategories();
     this.products = productService.products;
 
@@ -23,7 +25,8 @@ export class AddProductComponent implements OnInit {
       'category' : new FormControl(null, [Validators.required]),
       'availableQuantity': new FormControl(null, [Validators.required, Validators.min(1)]),
       'price': new FormControl(null, [Validators.required, Validators.min(1)]),
-      'description': new FormControl(null)
+      'description': new FormControl(null),
+      'size': new FormControl(null, [Validators.required]),
     });
   }
 
@@ -32,6 +35,12 @@ export class AddProductComponent implements OnInit {
   }
 
   onSubmit() {
-    console.log(this.newProductForm);
+    this.productService.addProduct(this.newProductForm.value['productName'],
+      this.newProductForm.value['category'],
+      this.newProductForm.value['productName'],
+      this.newProductForm.value['availableQuantity'],
+      this.newProductForm.value['description'],
+      this.newProductForm.value['size'])
+    this.router.navigate(['/product']);
   }
 }

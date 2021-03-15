@@ -6,7 +6,7 @@ import { OrderService } from "./order.service";
 import { ProductService } from "./product.service";
 
 @Injectable() export class NewOrderService{
-    
+    order: Order | undefined;
     //order: Order
     products:Product[] = [];
 
@@ -45,5 +45,6 @@ import { ProductService } from "./product.service";
 
     reset(){
         this.products = [];
+        this.order = undefined;
     }
 }

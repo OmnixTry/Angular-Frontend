@@ -1,5 +1,6 @@
-import { Component, OnInit } from '@angular/core';
-import { FormControl, FormGroup } from '@angular/forms';
+import { Component, OnDestroy, OnInit } from '@angular/core';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
 import { Order } from 'src/app/shared/models/order.model';
 import { Product } from 'src/app/shared/models/product.model';
 import { CustomerService } from 'src/app/shared/services/customer.service';
@@ -13,7 +14,7 @@ import { OrdersComponent } from '../orders.component';
   templateUrl: './add-order.component.html',
   styleUrls: ['./add-order.component.css']
 })
-export class AddOrderComponent implements OnInit {
+export class AddOrderComponent implements OnInit, OnDestroy {
   addOrderForm: FormGroup;
   products: Product[];
   totalCost: number;
@@ -21,31 +22,50 @@ export class AddOrderComponent implements OnInit {
   constructor(public customerService: CustomerService,
     public orderService: OrderService,
     public newOrderService: NewOrderService,
-    public productService: ProductService) { 
+    public productService: ProductService,
+    private router: Router) { 
       this.products = productService.products;
       this.totalCost = newOrderService.countTotalCost();
 
 
       this.addOrderForm = new FormGroup({
-        'createdDate': new FormControl(new Date()),
-        'customerId': new FormControl(),
-        'status': new FormControl(),
-        'comment': new FormControl()
+        'createdDate': new FormControl(newOrderService.order ? newOrderService.order.createdDate : new Date()),
+        'customerId': new FormControl(newOrderService.order ? newOrderService.order.customer.customerId : null, [Validators.required]),
+        'status': new FormControl(newOrderService.order ? newOrderService.order.status : null, [Validators.required]),
+        'comment': new FormControl(),
+        'totalCost': new FormControl(this.totalCost, [Validators.min(1)])
       })
     }
+  ngOnDestroy(): void {
+    this.newOrderService.order = this.generateOrder();
+  }
 
   ngOnInit(): void {
   }
 
-  onSubmit(){
-    const customer = this.customerService.getCustomerById(this.addOrderForm.value['customerId'])
+  private generateOrder():Order| undefined{
+    const customer = this.customerService.getCustomerById(this.addOrderForm.value['customerId']);
     if(customer){
-      const newOrder = new Order(0, new Date(), customer, 'New', this.totalCost, this.newOrderService.products);
+      return new Order(0, new Date(), customer, this.addOrderForm.value['status'], this.totalCost, this.newOrderService.products);
+    }
+    return undefined;
+  }
+
+  onSubmit(){
+    const newOrder = this.generateOrder();
+
+    if(newOrder){
       this.orderService.addOrder(newOrder);
     }
     else{
-      console.log("baad");
+      console.log("bad");
     }
     this.newOrderService.reset();
+    this.router.navigate(['/order']);
+  }
+
+  onCancel(){
+    this.newOrderService.reset();
+
   }
 }

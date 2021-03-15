@@ -2,7 +2,7 @@
     <label>
         Order Date:
     </label>
-    <input type="text" formControlName="createdDate">
+    <input type="text" formControlName="createdDate" [disabled]="true">
     <br>
     <label>
         Customer:
@@ -10,6 +10,8 @@
     <select formControlName="customerId">
         <option value={{customer.customerId}} *ngFor="let customer of customerService.customers">{{customer.name}}</option>
     </select>
+    <span class="help-block" *ngIf="addOrderForm.get('customerId')?.errors?.required && addOrderForm.get('customerId')?.touched">Field is required</span>
+
     <br>
     <label>
         Status:
@@ -17,9 +19,11 @@
     <select formControlName="status">
         <option value={{status}} *ngFor="let status of orderService.status">{{status}}</option>
     </select>
+    <span class="help-block" *ngIf="addOrderForm.get('status')?.errors?.required && addOrderForm.get('status')?.touched">Field is required</span>
+
     <br>
     <p>Total Cost: {{totalCost}}</p>
-
+    <span class="help-block" *ngIf="addOrderForm.get('totalCost')?.errors">No products are selected</span>
     <h1>Products</h1>
 <div>
   <table class="table table-bordered">
@@ -51,6 +55,6 @@
     <label>Comment:</label><br>
     <textarea cols="30" rows="10" formControlName="comment"></textarea>
     <br>
-    <button type="submit">Save</button>
+    <button type="submit" [disabled]="!addOrderForm.valid">Save</button>
     <button>Cancel</button>
 </form>

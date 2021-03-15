@@ -1,0 +1,5 @@
+---------------------1) add validation to order adding 
+---------------------2) add buttons for routing to add order
+---------------------3) put order to newOrderService
+---------------------4) Add New Product Adding 
+5) connect to backend

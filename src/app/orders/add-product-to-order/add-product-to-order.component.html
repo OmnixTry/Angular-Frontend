@@ -5,5 +5,11 @@
 <form [formGroup]="productForm" (ngSubmit)="onSubmit()">
     <label>Quantity</label>
     <input type="text" formControlName="quantity">
+    <span class="help-block" *ngIf="productForm.get('quantity')?.errors?.required && productForm.get('quantity')?.touched">Field is required</span>
+    <span class="help-block" *ngIf="productForm.get('quantity')?.errors?.min && productForm.get('quantity')?.touched">Quantity has to be more than 1</span>
+    <span class="help-block" *ngIf="productForm.get('quantity')?.errors?.max && productForm.get('quantity')?.touched">Not enough items in stock</span>
+    <br>
     <button type="submit">Save</button>
+
+
 </form>

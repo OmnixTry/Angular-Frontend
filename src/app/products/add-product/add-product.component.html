@@ -11,7 +11,14 @@
     </select>
     <br>
 
-    <label for="sss">Quantity</label>
+    <label for="sss">Size</label>
+    <select name="size"formControlName="size">
+        <option *ngFor="let size of productService.getSizes()" value={{size}}>{{size}}</option>
+    </select>
+    <span class="help-block" *ngIf="newProductForm.get('size')?.errors?.required && newProductForm.get('size')?.touched">Field is required</span>
+    <br>
+
+    <label for="sss" class="form-label">Quantity</label>
     <input type="text" name="availableQuantity" id="" formControlName="availableQuantity"><br>
     <span class="help-block" *ngIf="newProductForm.get('availableQuantity')?.errors?.required && newProductForm.get('availableQuantity')?.touched">Field is required</span>
     <span class="help-block" *ngIf="newProductForm.get('availableQuantity')?.errors?.min">Incorrect Quantity</span>
@@ -24,7 +31,7 @@
 
     <label for="sss">Description</label>
     <input type="textBlock" name="description" id="" formControlName="description"><br>
-
+    
 
     <button class="btn btn-primary" type="submit" [disabled]="!newProductForm.valid">Add</button><br>
 </form>
