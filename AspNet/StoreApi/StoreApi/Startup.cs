@@ -33,6 +33,10 @@ namespace StoreApi
         {
             services.AddControllers();
             services.AddAutoMapper(typeof(Infrastructure.AutoMapperprofile), typeof(BLL.Infrastructure.AutoMapperprofile));
+            services.AddCors(c =>
+            {
+                c.AddPolicy("AllowOrigin", options => options.AllowAnyOrigin());
+            });
             services.AddTransient<IUnitOfWork, EFUnitOfWork>((provider) =>
             {
                 return new EFUnitOfWork(ConnectionStringReader.DefaultConfiguration);
@@ -55,6 +59,8 @@ namespace StoreApi
 
             app.UseRouting();
 
+            app.UseCors(options => options.AllowAnyOrigin());
+  
             app.UseAuthorization();
 
             app.UseEndpoints(endpoints =>

@@ -18,6 +18,8 @@ namespace DAL.Entities
 
         public Customer Customer { get; set; }
 
+        public DateTimeOffset CreatedDate { get; set; }
+
         ICollection<OrderDetail> OrderDetails { get; set; }
         
     }

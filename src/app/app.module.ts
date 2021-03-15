@@ -22,6 +22,7 @@ import { OrderViewComponent } from './orders/order-view/order-view.component';
 import { AddProductToOrderComponent } from './orders/add-product-to-order/add-product-to-order.component';
 import { AddOrderComponent } from './orders/add-order/add-order.component';
 import { NewOrderService } from './shared/services/new-order.service';
+import { HttpClientModule } from '@angular/common/http';
 
 const appRoutes : Routes = [
   {path: 'customer', component: CustomersComponent},
@@ -58,7 +59,8 @@ const appRoutes : Routes = [
     AppRoutingModule,
     FormsModule,
     RouterModule.forRoot(appRoutes),
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    HttpClientModule,
   ],
   providers: [CustomerService, ProductService, OrderService, NewOrderService],
   bootstrap: [AppComponent]

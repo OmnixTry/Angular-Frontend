@@ -1,10 +1,11 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using AutoMapper;
 using BLL.DTO;
 using BLL.Interfaces;
+using Microsoft.AspNetCore.Cors;
 using Microsoft.AspNetCore.Mvc;
 using StoreApi.Models;
 
@@ -12,6 +13,7 @@ using StoreApi.Models;
 
 namespace StoreApi.Controllers
 {
+    [EnableCors("AllowOrigin")]
     [Route("api/[controller]")]
     [ApiController]
     public class CustomerController : ControllerBase
