@@ -1,10 +1,11 @@
-﻿using AutoMapper;
+using AutoMapper;
 using BLL.DTO;
 using BLL.Interfaces;
 using DAL.Entities;
 using DAL.Interfaces;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 
 namespace BLL.Services
@@ -15,7 +16,17 @@ namespace BLL.Services
         {
         }
 
-        public void Create(CustomerDTO toCreate)
+    public int CountOrders(int id)
+    {
+      return _unitOfWork.CustomerRepository.GetOrdersOfACustomer(id).Count();
+    }
+
+    public int CountTotalcost(int id)
+    {
+      return _unitOfWork.OrderRepository.CountTotalCost(id);        
+    }
+
+    public void Create(CustomerDTO toCreate)
         {
             toCreate.Id = 0;
             toCreate.CreatedDate = DateTime.Now;

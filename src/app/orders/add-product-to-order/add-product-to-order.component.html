@@ -1,7 +1,7 @@
-<h1>Add Product to Order #{{product.productNumber}}</h1>
-<p>Product Number: {{product.productNumber}}</p>
+<h1>Add Product to Order #{{product.id}}</h1>
+<p>Product Number: {{product.id}}</p>
 <p>Product Name: {{product.productName}}</p>
-<p>productCategory: {{product.productCategory}}</p>
+<p>categoryId: {{product.categoryId}}</p>
 <form [formGroup]="productForm" (ngSubmit)="onSubmit()">
     <label>Quantity</label>
     <input type="text" formControlName="quantity">

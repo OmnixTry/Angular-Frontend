@@ -12,8 +12,8 @@
         <tr *ngFor="let customer of customers">
             <td>{{ customer.name}}</td>
             <td>{{ customer.address }}</td>
-            <td>TBA</td>
-            <td>TBA</td>
+            <td> {{ orderCost.get(customer.id )}} </td>
+            <td>{{ orderQuantity.get(customer.id) }}</td>
         </tr>
     </tbody>
 </table>

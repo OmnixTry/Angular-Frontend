@@ -23,6 +23,7 @@ import { AddProductToOrderComponent } from './orders/add-product-to-order/add-pr
 import { AddOrderComponent } from './orders/add-order/add-order.component';
 import { NewOrderService } from './shared/services/new-order.service';
 import { HttpClientModule } from '@angular/common/http';
+import { CategoryService } from './shared/services/category.service';
 
 const appRoutes : Routes = [
   {path: 'customer', component: CustomersComponent},
@@ -62,7 +63,7 @@ const appRoutes : Routes = [
     ReactiveFormsModule,
     HttpClientModule,
   ],
-  providers: [CustomerService, ProductService, OrderService, NewOrderService],
+  providers: [CustomerService, ProductService, OrderService, NewOrderService, CategoryService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

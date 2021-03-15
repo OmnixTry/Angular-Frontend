@@ -6,7 +6,6 @@
         <td>ProductId</td>
         <td>Product Name</td>
         <td>Product Category</td>
-        <td>Product Size</td>
         <td>Product Quantity</td>
         <td>Product Price</td>
         <td>Creation Date</td>
@@ -15,14 +14,13 @@
     </thead>
     <tbody>
       <tr *ngFor="let product of products">
-        <td><a [routerLink]="[product.productNumber]">{{product.productNumber}}</a></td>
+        <td><a [routerLink]="[product.id]">{{product.id}}</a></td>
         <td>{{product.productName}}</td>
-        <td>{{product.productCategory}}</td>
-        <td>{{product.size}}</td>
+        <td>{{categoryService.getName(product.categoryId)}}</td>
         <td>{{product.availableQuantity}}</td>
         <td>{{product.price}}</td>
-        <td>{{product.createdDate}}</td>
-        <td><button (click)="onDeleteClicked(product.productNumber)">Delete</button></td>
+        <td>{{product.creationDate}}</td>
+        <td><button (click)="onDeleteClicked(product.id)">Delete</button></td>
       </tr>
     </tbody>
   </table>

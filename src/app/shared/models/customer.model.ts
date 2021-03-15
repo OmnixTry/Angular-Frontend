@@ -1,13 +1,13 @@
 export class Customer {
-    public customerId:number;
+    public id:number;
     public name: string;
     public address: string;
-    readonly creationDate: Date;
+    readonly createdDate: Date;
 
-    constructor(name: string, address: string, creationDate: Date, customerId: number = 0){
+    constructor(name: string, address: string, createdDate: Date, id: number = 0){
         this.name = name;
         this.address = address;
-        this.creationDate = creationDate;
-        this.customerId = customerId;
+        this.createdDate = createdDate;
+        this.id = id;
     }
 }

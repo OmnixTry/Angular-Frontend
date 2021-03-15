@@ -10,10 +10,10 @@ import { Customer } from '../../shared/models/customer.model';
 })
 export class CustomerAddComponent implements OnInit {
   @ViewChild('custForm') creationForm?: NgForm;
-  creationDatee:Date;
+  createdDatee:Date;
 
   constructor(private customerService: CustomerService) {
-    this.creationDatee = new Date();
+    this.createdDatee = new Date();
   }
 
   ngOnInit(): void {

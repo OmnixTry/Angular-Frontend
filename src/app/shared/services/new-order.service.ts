@@ -20,14 +20,15 @@ import { ProductService } from "./product.service";
         const product = this.orderService.substractQuantity(productId, quantity);
         if(product){
             const addedProduct = {
-                productNumber: product.productNumber,
-                createdDate: product.createdDate,
+                id: product.id,
+                creationDate: product.creationDate,
                 productName: product.productName,
-                productCategory: product.productCategory,
+                categoryId: product.categoryId,
                 availableQuantity: quantity,
                 price: product.price,
                 description: product.description,
                 size: product.size,
+                category: ''
             };
             this.products.push(addedProduct);
         }

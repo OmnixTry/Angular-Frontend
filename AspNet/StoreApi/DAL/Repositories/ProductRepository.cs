@@ -1,6 +1,7 @@
-﻿using DAL.EF;
+using DAL.EF;
 using DAL.Entities;
 using DAL.Interfaces;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -17,7 +18,7 @@ namespace DAL.Repositories
         public List<Product> GetProductsOfTheOrder(int orderId)
         {
             IQueryable<int> ids = _context.OrderDetails.Where(od => od.OrderId == orderId).Select(od => od.ProductId);
-            return _context.Products.Where(p => ids.Contains(p.Id)).ToList();
+            return _context.Products.Include(el => el.Category).Where(p => ids.Contains(p.Id)).ToList();
         }
     }
 }

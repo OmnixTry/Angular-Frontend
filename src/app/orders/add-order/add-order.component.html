@@ -7,10 +7,10 @@
     <label>
         Customer:
     </label>
-    <select formControlName="customerId">
-        <option value={{customer.customerId}} *ngFor="let customer of customerService.customers">{{customer.name}}</option>
+    <select formControlName="id">
+        <option value={{customer.id}} *ngFor="let customer of customerService.customers">{{customer.name}}</option>
     </select>
-    <span class="help-block" *ngIf="addOrderForm.get('customerId')?.errors?.required && addOrderForm.get('customerId')?.touched">Field is required</span>
+    <span class="help-block" *ngIf="addOrderForm.get('id')?.errors?.required && addOrderForm.get('id')?.touched">Field is required</span>
 
     <br>
     <label>
@@ -40,13 +40,13 @@
     </thead>
     <tbody>
       <tr *ngFor="let product of products">
-        <td><a [routerLink]="[product.productNumber]">{{product.productNumber}}</a></td>
+        <td><a [routerLink]="[product.id]">{{product.id}}</a></td>
         <td>{{product.productName}}</td>
-        <td>{{product.productCategory}}</td>
+        <td>{{product.categoryId}}</td>
         <td>{{product.size}}</td>
         <td>{{product.availableQuantity}}</td>
         <td>{{product.price}}</td>
-        <td>{{product.createdDate}}</td>
+        <td>{{product.creationDate}}</td>
       </tr>
     </tbody>
   </table>

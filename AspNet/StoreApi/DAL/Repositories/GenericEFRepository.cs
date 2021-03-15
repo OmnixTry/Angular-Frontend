@@ -1,4 +1,4 @@
-﻿using DAL.EF;
+using DAL.EF;
 using DAL.Interfaces;
 using Microsoft.EntityFrameworkCore;
 using System;
@@ -23,7 +23,7 @@ namespace DAL.Repositories
             _entities.Remove(GetById(id));
         }
 
-        public List<TEntity> FindAll()
+        public virtual List<TEntity> FindAll()
         {
             return _entities.ToList();
         }

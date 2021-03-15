@@ -7,10 +7,9 @@
     </thead>
     <tbody>
         <tr *ngFor="let order of orders">
-            <td><a [routerLink]="[order.orderNumber]">{{order.orderNumber}}</a></td>
+            <td><a [routerLink]="[order.id]">{{order.id}}</a></td>
             <td>{{order.customer.name}}</td>
             <td>{{order.customer.address}}</td>
-            <td>{{order.totalCost}}</td>
             <td>{{order.status}}</td>
         </tr>
     </tbody>

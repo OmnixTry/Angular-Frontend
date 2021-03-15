@@ -1,29 +1,34 @@
 import { Injectable } from "@angular/core";
 import { Customer } from "../models/customer.model";
 import { HttpClient } from "@angular/common/http";
-
+import { Order } from "../models/order.model";
 
 @Injectable()export class CustomerService {
-    private _customers: Customer[] = [
-        {name: 'Robert', address: 'Gud street', creationDate: new Date(), customerId: 1},
-        {name: 'William', address: 'Nice street street', creationDate: new Date(), customerId: 2},
-        {name: 'Cindy', address: 'Fine street', creationDate: new Date(), customerId: 3},
-    ];
+    readonly originalLink = 'https://localhost:5001/api/customer/';
+    private _customers: Customer[] = [];
 
-    constructor(private http: HttpClient){
-        http.get('https://localhost:5001/api/customer/')
-            .subscribe((customers)=> { console.log(customers)})
+    constructor(private http: HttpClient,){
+        
     }
 
     get customers(){
-
+        this.http.get<Customer[]>(this.originalLink)
+        .subscribe((customers)=> { this._customers.splice(0, this._customers.length); this._customers.push(...customers)});
         return this._customers;
     }
+
+    customersObservable(){
+        return this.http.get<Customer[]>(this.originalLink);
+    }
+
     addCustomer(customer: Customer): void{
         this._customers.push(customer);
     }
 
-    getCustomerById(customerId: number){
-        return this.customers.find((el) => {return el.customerId == customerId})
+    getCustomerById(id: number){
+        return this.customers.find((el) => {return el.id == id})
+    }
+    getCustomerOrders(customerId: number){
+        return this.http.get<Order[]>(this.originalLink + customerId + "/orders/");
     }
 }

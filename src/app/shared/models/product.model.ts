@@ -1,29 +1,32 @@
 export class Product{
-    productNumber: number;
-    createdDate: Date;
+    id: number;
+    creationDate: Date;
     productName: string;
-    productCategory: string;
+    categoryId: number;
     availableQuantity: number;
     price: number;
     description?: string = '';
     size: string;
+    category: string;
 
-    constructor(productNumber: number,
-        createdDate: Date,
+    constructor(id: number,
+        creationDate: Date,
         productName: string,
-        productCategory: string,
+        categoryId: number,
         availableQuantity: number,
         price: number,
         description: string,
-        size: string)
+        size: string,
+        category: string)
     {
-        this.productNumber = productNumber;
-        this.createdDate = createdDate;
+        this.id = id;
+        this.creationDate = creationDate;
         this.productName = productName;
-        this.productCategory = productCategory;
+        this.categoryId = categoryId;
         this.availableQuantity = availableQuantity;
         this.price = price;
         this.description = description;
         this.size = size;
+        this.category = category;
     }
 }

@@ -1,4 +1,4 @@
-﻿using AutoMapper;
+using AutoMapper;
 using BLL.DTO;
 using BLL.Interfaces;
 using DAL.Entities;
@@ -104,6 +104,7 @@ namespace BLL.Services
 
         public IEnumerable<ProductDTO> GetOrderProducts(int orderId)
         {
+            var a = _unitOfWork.ProductRepository.GetProductsOfTheOrder(orderId);
             List<ProductDTO> products = _mapper.Map<List<Product>, List<ProductDTO>>(_unitOfWork.ProductRepository.GetProductsOfTheOrder(orderId));
             List<OrderDetailDTO> orderDetails = _mapper.Map<List<OrderDetail>, List<OrderDetailDTO>>(_unitOfWork.OrderDetaiRepository.FindByOrderId(orderId));
             foreach(ProductDTO product in products)

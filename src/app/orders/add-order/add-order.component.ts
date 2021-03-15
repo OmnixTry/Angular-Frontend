@@ -30,7 +30,7 @@ export class AddOrderComponent implements OnInit, OnDestroy {
 
       this.addOrderForm = new FormGroup({
         'createdDate': new FormControl(newOrderService.order ? newOrderService.order.createdDate : new Date()),
-        'customerId': new FormControl(newOrderService.order ? newOrderService.order.customer.customerId : null, [Validators.required]),
+        'customerId': new FormControl(newOrderService.order ? newOrderService.order.customer : null, [Validators.required]),
         'status': new FormControl(newOrderService.order ? newOrderService.order.status : null, [Validators.required]),
         'comment': new FormControl(),
         'totalCost': new FormControl(this.totalCost, [Validators.min(1)])
@@ -46,7 +46,7 @@ export class AddOrderComponent implements OnInit, OnDestroy {
   private generateOrder():Order| undefined{
     const customer = this.customerService.getCustomerById(this.addOrderForm.value['customerId']);
     if(customer){
-      return new Order(0, new Date(), customer, this.addOrderForm.value['status'], this.totalCost, this.newOrderService.products);
+      return new Order(0, new Date(), customer, this.addOrderForm.value['status'], 1 ,this.totalCost, this.newOrderService.products);
     }
     return undefined;
   }

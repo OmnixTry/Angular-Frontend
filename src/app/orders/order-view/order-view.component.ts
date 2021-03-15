@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Order } from 'src/app/shared/models/order.model';
+import { CategoryService } from 'src/app/shared/services/category.service';
 import { OrderService } from 'src/app/shared/services/order.service';
 
 @Component({
@@ -11,13 +12,14 @@ import { OrderService } from 'src/app/shared/services/order.service';
 export class OrderViewComponent implements OnInit {
   order?: Order
   constructor(private orderService: OrderService,
-    private router: ActivatedRoute) { 
+    private router: ActivatedRoute,
+    public categoryService: CategoryService) { 
     const orderNumber = <number>this.router.snapshot.params['id'];
-    this.order = this.orderService.getOrderById(orderNumber);
+    this.order = this.orderService.getOrderById(orderNumber);   
   }
 
   ngOnInit(): void {
-    console.log(this.order)
+    
   }
 
 }

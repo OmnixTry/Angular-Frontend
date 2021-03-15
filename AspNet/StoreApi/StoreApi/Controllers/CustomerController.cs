@@ -77,6 +77,17 @@ namespace StoreApi.Controllers
         {
              return _mapper.Map<IEnumerable<OrderDTO>, IEnumerable<OrderModel>>(_customerService.GetOrders(id));
         }
-        //TODO GetOrdersOfCustomer
+        [HttpGet("{id}/orders/quantity")]
+        public int GetQuantity(int id)
+    {
+      return _customerService.CountOrders(id);
     }
+
+    [HttpGet("{id}/orders/cost")]
+    public int GetCost(int id)
+    {
+      return _customerService.CountTotalcost(id);
+    }
+    //TODO GetOrdersOfCustomer
+  }
 }

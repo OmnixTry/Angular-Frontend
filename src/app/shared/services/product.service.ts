@@ -1,80 +1,52 @@
+import { HttpClient } from '@angular/common/http';
 import { sanitizeIdentifier } from '@angular/compiler';
+import { Injectable } from '@angular/core';
 import { Product } from '../models/product.model';
 
-export class ProductService {
-  private _products: Product[] = [
-    {
-      productNumber: 1,
-      createdDate: new Date(),
-      productName: 'Onion',
-      productCategory: 'Vegetable',
-      availableQuantity: 100,
-      price: 10,
-      description: 'funny onions',
-      size: 'Medium'
-      
-    },
-    {
-      productNumber: 2,
-      createdDate: new Date(),
-      productName: 'Cucumber',
-      productCategory: 'Vegetable',
-      availableQuantity: 120,
-      price: 20,
-      size: 'Medium'
-    },
-    {
-      productNumber: 3,
-      createdDate: new Date(),
-      productName: 'Cabbage',
-      productCategory: 'Vegetable',
-      availableQuantity: 150,
-      price: 15,
-      description: 'yet another product',
-      size: 'Medium'
-    },
-    {
-      productNumber: 4,
-      createdDate: new Date(),
-      productName: 'Pepsi',
-      productCategory: 'Beverage',
-      availableQuantity: 1000,
-      price: 100,
-      description: 'Nice drincc',
-      size: 'Medium'
-    },
-  ];
+@Injectable()export class ProductService {
+  private _products: Product[] = [];
+
+  constructor(private http: HttpClient){
+
+  }
 
   get products(): Product[] {
+    this.http.get<Product[]>('https://localhost:5001/api/product/')
+            .subscribe((customers)=> 
+            { 
+              this._products.splice(0, this._products.length); 
+              this._products.push(...customers)
+            });
     return this._products;
   }
 
   addProduct(
     productName: string,
-    productCategory: string,
+    categoryId: number,
     availableQuantity: number,
     price: number,
     description: string,
     size: string
   ) {
     this._products.push({
-      productNumber: 0,
-      createdDate: new Date(),
+      id: 0,
+      creationDate: new Date(),
       productName: productName,
-      productCategory: productCategory,
+      categoryId: categoryId,
       availableQuantity: availableQuantity,
       price: price,
       description: description,
       size: size,
+      category: ''
     });
   }
 
   getCollumns(): string[] {
     return [
-      'productNumber',
+      'id',
       'productName',
       'createdDate',
-      'productCategory',
+      'categoryId',
       'availableQuantity',
       'price',
       'description',
@@ -89,13 +61,13 @@ export class ProductService {
     return ['Small', 'Medium', 'Large'];
   }
 
-  deleteProduct(productNumber: number){
-    const index = this.products.findIndex(el => { return el.productNumber == productNumber})
+  deleteProduct(id: number){
+    const index = this.products.findIndex(el => { return el.id == id})
     this.products.splice(index, 1);
   }
 
-  getProductById(productNumber: number): Product{
-    const index = this.products.findIndex(el => { return el.productNumber == productNumber})
+  getProductById(id: number): Product{
+    const index = this.products.findIndex(el => { return el.id == id})
     return this.products[index];
   }
 }

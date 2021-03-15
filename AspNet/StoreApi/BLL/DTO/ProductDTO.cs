@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Text;
 
@@ -19,5 +19,8 @@ namespace BLL.DTO
         public string Description { get; set; }
 
         public int? CategoryId { get; set; }
-    }
+
+        public string Category { get; set; }
+
+  }
 }

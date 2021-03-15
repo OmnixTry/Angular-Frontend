@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Product } from 'src/app/shared/models/product.model';
+import { CategoryService } from 'src/app/shared/services/category.service';
 import { CustomerService } from 'src/app/shared/services/customer.service';
 import { ProductService } from 'src/app/shared/services/product.service';
 
@@ -12,17 +13,18 @@ export class ProductListComponent implements OnInit {
   products: Product[];
   columns: string[];
 
-  constructor(private productService: ProductService) { 
+  constructor(private productService: ProductService,
+    public categoryService: CategoryService) { 
     this.products = this.productService.products;
-    console.log(this.products);
+    console.log(this.products); 
     this.columns = productService.getCollumns();
   }
 
   ngOnInit(): void {
   }
 
-  onDeleteClicked(productNumber: number){
-    console.log(productNumber);
-    this.productService.deleteProduct(productNumber)
+  onDeleteClicked(id: number){
+    console.log(id);
+    this.productService.deleteProduct(id)
   }
 }
