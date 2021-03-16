@@ -1,3 +1,4 @@
+import { DatePipe } from '@angular/common';
 import { HttpClient } from '@angular/common/http';
 import { sanitizeIdentifier } from '@angular/compiler';
 import { Injectable } from '@angular/core';
@@ -5,13 +6,15 @@ import { Product } from '../models/product.model';
 
 @Injectable()export class ProductService {
   private _products: Product[] = [];
+  private readonly baseUrl = 'https://localhost:5001/api/product/';
+  private readonly datePipe = new DatePipe('en-US');
 
   constructor(private http: HttpClient){
 
   }
 
   get products(): Product[] {
-    this.http.get<Product[]>('https://localhost:5001/api/product/')
+    this.http.get<Product[]>(this.baseUrl)
             .subscribe((customers)=> 
             { 
               this._products.splice(0, this._products.length); 
@@ -28,6 +31,7 @@ import { Product } from '../models/product.model';
     description: string,
     size: string
   ) {
+    /*
     this._products.push({
       id: 0,
       creationDate: new Date(),
@@ -39,6 +43,15 @@ import { Product } from '../models/product.model';
       size: size,
       category: ''
     });
+    */
+    var date = this.datePipe.transform(new Date(), 'yyyy-MM-dd');
+    var newProduct: Product = new Product(0, date ? date : '',
+    productName, categoryId, availableQuantity, price, description, size, '');
+
+    console.log(newProduct);
+
+    this.http.post(this.baseUrl, newProduct
+    ).subscribe(el => console.log(el));
   }
 
   getCollumns(): string[] {

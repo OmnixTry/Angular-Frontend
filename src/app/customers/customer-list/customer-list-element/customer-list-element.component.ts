@@ -14,16 +14,7 @@ export class CustomerListElementComponent implements OnInit {
   numberOfOrders: number = 0;
 
   constructor(private customerService: CustomerService) {
-    customerService.getCustomerOrders(this.customer.id).subscribe(orders => {
-      for (let index = 0; index < orders.length; index++) {
-        const element = orders[index];
-        this.numberOfOrders += 1;
-        for (let index = 0; index < element.products.length; index++) {
-          const product = element.products[index];
-          this.totalCost += product.price * product.availableQuantity;
-        }
-      }
-    })
+    
    }
 
   ngOnInit(): void {

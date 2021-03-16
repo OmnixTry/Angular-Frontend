@@ -7,7 +7,7 @@
 
     <label for="sss">Category</label>
     <select name="category"formControlName="category">
-        <option *ngFor="let category of categories" value={{category}}>{{category}}</option>
+        <option *ngFor="let category of categories; let indexOfelement=index;" value={{indexOfelement}}>{{category}}</option>
     </select>
     <br>
 

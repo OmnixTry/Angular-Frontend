@@ -1,5 +1,6 @@
 import { Component, Input, OnInit, Output, ViewChild } from '@angular/core';
 import { NgForm } from '@angular/forms';
+import { Router } from '@angular/router';
 import { CustomerService } from 'src/app/shared/services/customer.service';
 import { Customer } from '../../shared/models/customer.model';
 
@@ -12,7 +13,8 @@ export class CustomerAddComponent implements OnInit {
   @ViewChild('custForm') creationForm?: NgForm;
   createdDatee:Date;
 
-  constructor(private customerService: CustomerService) {
+  constructor(private customerService: CustomerService,
+    private router: Router) {
     this.createdDatee = new Date();
   }
 
@@ -26,6 +28,7 @@ export class CustomerAddComponent implements OnInit {
     if(this.creationForm){
       this.creationForm.reset()
     }
+    this.router.navigate(['/customer']);
   }
 
   

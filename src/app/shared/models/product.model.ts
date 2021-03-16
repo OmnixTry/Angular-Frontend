@@ -1,6 +1,6 @@
 export class Product{
     id: number;
-    creationDate: Date;
+    creationDate: Date | string;
     productName: string;
     categoryId: number;
     availableQuantity: number;
@@ -10,7 +10,7 @@ export class Product{
     category: string;
 
     constructor(id: number,
-        creationDate: Date,
+        creationDate: Date |string,
         productName: string,
         categoryId: number,
         availableQuantity: number,

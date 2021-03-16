@@ -1,19 +1,21 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using AutoMapper;
 using BLL.DTO;
 using BLL.Interfaces;
+using Microsoft.AspNetCore.Cors;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using StoreApi.Models;
 
 namespace StoreApi.Controllers
 {
-    [Route("api/[controller]")]
-    [ApiController]
-    public class ProductController : ControllerBase
+  [EnableCors("AllowOrigin")]
+  [Route("api/[controller]")]
+  [ApiController]
+  public class ProductController : ControllerBase
     {
         private readonly IMapper _mapper;
         private IProductService _productService;

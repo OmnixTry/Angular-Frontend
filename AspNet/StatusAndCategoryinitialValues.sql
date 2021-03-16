@@ -103,5 +103,6 @@ select * from Products
 SELECT * FROM Categories
 SELECT * FROM Customers
 SELECT * FROM Orders
+SELECT * FROM OrderDetails
 DELETE FROM Customers
   select * from Statuses

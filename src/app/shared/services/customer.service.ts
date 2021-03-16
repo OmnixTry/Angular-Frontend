@@ -2,12 +2,14 @@ import { Injectable } from "@angular/core";
 import { Customer } from "../models/customer.model";
 import { HttpClient } from "@angular/common/http";
 import { Order } from "../models/order.model";
+import { DatePipe } from "@angular/common";
+import { Router } from "@angular/router";
 
 @Injectable()export class CustomerService {
     readonly originalLink = 'https://localhost:5001/api/customer/';
     private _customers: Customer[] = [];
 
-    constructor(private http: HttpClient,){
+    constructor(private http: HttpClient){
         
     }
 
@@ -22,7 +24,15 @@ import { Order } from "../models/order.model";
     }
 
     addCustomer(customer: Customer): void{
-        this._customers.push(customer);
+        var pipe = new DatePipe('en-US');
+        console.log(pipe.transform(customer.createdDate, 'yyyy-MM-dd'));
+          //customer.createdDate = customer.createdDate.toJSON();
+
+        this.http.post(this.originalLink, {
+            id: 0, 
+            address:customer.address, 
+            createdDate: pipe.transform(customer.createdDate, 'yyyy-MM-dd'),
+            name: customer.name}).subscribe(res => console.log(res));
     }
 
     getCustomerById(id: number){

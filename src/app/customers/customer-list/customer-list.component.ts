@@ -59,7 +59,6 @@ export class CustomerListComponent implements OnInit {
   }
 
   countTotalCost(customerId: number){
-    console.log('https://localhost:5001/api/customer/'+ customerId +'/orders/cost');
     return this.http.get<number>('https://localhost:5001/api/customer/'+ customerId +'/orders/cost');
   }
 

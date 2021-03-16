@@ -31,11 +31,12 @@ namespace StoreApi
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+
             services.AddControllers();
             services.AddAutoMapper(typeof(Infrastructure.AutoMapperprofile), typeof(BLL.Infrastructure.AutoMapperprofile));
             services.AddCors(c =>
             {
-                c.AddPolicy("AllowOrigin", options => options.AllowAnyOrigin());
+                c.AddPolicy("AllowOrigin", options => options.AllowAnyOrigin().AllowAnyMethod().AllowAnyHeader());
             });
             services.AddTransient<IUnitOfWork, EFUnitOfWork>((provider) =>
             {

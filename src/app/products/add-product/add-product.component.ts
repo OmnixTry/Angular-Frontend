@@ -35,10 +35,11 @@ export class AddProductComponent implements OnInit {
   }
 
   onSubmit() {
+    //this.productService.addProduct('sss', 1, 1, 1, 'bbb', 'ccc');
     this.productService.addProduct(this.newProductForm.value['productName'],
-      this.newProductForm.value['category'],
-      this.newProductForm.value['productName'],
-      this.newProductForm.value['availableQuantity'],
+      +this.newProductForm.value['category'],
+      +this.newProductForm.value['availableQuantity'],
+      +this.newProductForm.value['price'],
       this.newProductForm.value['description'],
       this.newProductForm.value['size'])
     this.router.navigate(['/product']);
