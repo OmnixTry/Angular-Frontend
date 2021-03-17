@@ -3,3 +3,4 @@
 ---------------------3) put order to newOrderService
 ---------------------4) Add New Product Adding 
 5) connect to backend
+6) URL to global constant

@@ -8,7 +8,7 @@
         Customer:
     </label>
     <select formControlName="id">
-        <option value={{customer.id}} *ngFor="let customer of customerService.customers">{{customer.name}}</option>
+        <option value={{customer.id}} *ngFor="let customer of customers">{{customer.name}}</option>
     </select>
     <span class="help-block" *ngIf="addOrderForm.get('id')?.errors?.required && addOrderForm.get('id')?.touched">Field is required</span>
 

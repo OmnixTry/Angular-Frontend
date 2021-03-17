@@ -24,46 +24,53 @@ import { AddOrderComponent } from './orders/add-order/add-order.component';
 import { NewOrderService } from './shared/services/new-order.service';
 import { HttpClientModule } from '@angular/common/http';
 import { CategoryService } from './shared/services/category.service';
+import { SizeService } from './shared/services/size.service';
 
-const appRoutes : Routes = [
-  {path: 'customer', component: CustomersComponent},
-  {path: 'customer/add', component: CustomerAddComponent},
-  {path: 'product', component: ProductsComponent},
-  {path: 'product/add', component: AddProductComponent},
-  {path: 'order', component: OrdersComponent},
-  {path: 'order/add', component: AddOrderComponent},
-  {path: 'order/add/:id', component: AddProductToOrderComponent},
-  {path: 'order/:id', component: OrderViewComponent},
-
-]
+const appRoutes: Routes = [
+	{ path: 'customer', component: CustomersComponent },
+	{ path: 'customer/add', component: CustomerAddComponent },
+	{ path: 'product', component: ProductsComponent },
+	{ path: 'product/add', component: AddProductComponent },
+	{ path: 'order', component: OrdersComponent },
+	{ path: 'order/add', component: AddOrderComponent },
+	{ path: 'order/add/:id', component: AddProductToOrderComponent },
+	{ path: 'order/:id', component: OrderViewComponent },
+];
 
 @NgModule({
-  declarations: [
-    AppComponent,
-    CustomersComponent,
-    CustomerListComponent,
-    CustomerAddComponent,
-    HeaderComponent,
-    CustomerListElementComponent,
-    ProductsComponent,
-    ProductListComponent,
-    ProductElementComponent,
-    AddProductComponent,
-    OrdersComponent,
-    OrderListComponent,
-    OrderViewComponent,
-    AddProductToOrderComponent,
-    AddOrderComponent,
-  ],
-  imports: [
-    BrowserModule,
-    AppRoutingModule,
-    FormsModule,
-    RouterModule.forRoot(appRoutes),
-    ReactiveFormsModule,
-    HttpClientModule,
-  ],
-  providers: [CustomerService, ProductService, OrderService, NewOrderService, CategoryService],
-  bootstrap: [AppComponent]
+	declarations: [
+		AppComponent,
+		CustomersComponent,
+		CustomerListComponent,
+		CustomerAddComponent,
+		HeaderComponent,
+		CustomerListElementComponent,
+		ProductsComponent,
+		ProductListComponent,
+		ProductElementComponent,
+		AddProductComponent,
+		OrdersComponent,
+		OrderListComponent,
+		OrderViewComponent,
+		AddProductToOrderComponent,
+		AddOrderComponent,
+	],
+	imports: [
+		BrowserModule,
+		AppRoutingModule,
+		FormsModule,
+		RouterModule.forRoot(appRoutes),
+		ReactiveFormsModule,
+		HttpClientModule,
+	],
+	providers: [
+		CustomerService,
+		ProductService,
+		OrderService,
+		NewOrderService,
+		CategoryService,
+		SizeService,
+	],
+	bootstrap: [AppComponent],
 })
-export class AppModule { }
+export class AppModule {}

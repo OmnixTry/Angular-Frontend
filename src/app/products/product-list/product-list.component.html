@@ -5,7 +5,7 @@
       <tr>
         <td>ProductId</td>
         <td>Product Name</td>
-        <!-- <td>Product Category</td> -->
+        <td>Product Category</td>
         <td>Product Quantity</td>
         <td>Product Price</td>
         <td>Creation Date</td>
@@ -16,7 +16,7 @@
       <tr *ngFor="let product of products">
         <td><a [routerLink]="[product.id]">{{product.id}}</a></td>
         <td>{{product.productName}}</td>
-        <!-- <td>{{categoryService.getName(product.categoryId)}}</td> -->
+        <td>{{ getCategoryName(product.categoryId) }}</td>
         <td>{{product.availableQuantity}}</td>
         <td>{{product.price}}</td>
         <td>{{product.creationDate}}</td>

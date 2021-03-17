@@ -38,9 +38,17 @@ namespace StoreApi.Controllers
         }
         // GET: api/<User>
         [HttpGet]
-        public IEnumerable<CustomerModel> Get()
+        public IEnumerable<CustomerDetailModel> Get()
         {
-            return _mapper.Map<IEnumerable<CustomerDTO>, IEnumerable<CustomerModel>>(_customerService.GetAll());
+			IEnumerable<CustomerModel> customers = _mapper.Map<IEnumerable<CustomerDTO>, IEnumerable<CustomerModel>>(_customerService.GetAll());
+			List<CustomerDetailModel> details = _mapper.Map<IEnumerable<CustomerModel>, IEnumerable<CustomerDetailModel>>(customers).ToList();
+			foreach (var detail in details)
+			{
+				detail.OrderCount = _customerService.CountOrders(detail.Id);
+				detail.TotalCost = _customerService.CountTotalcost(detail.Id);
+
+			}
+			return details;
         }
 
         // GET api/<User>/5

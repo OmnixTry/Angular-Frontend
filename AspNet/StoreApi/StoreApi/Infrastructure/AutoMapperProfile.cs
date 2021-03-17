@@ -1,4 +1,4 @@
-﻿using AutoMapper;
+using AutoMapper;
 using BLL.DTO;
 using StoreApi.Models;
 using System;
@@ -17,6 +17,7 @@ namespace StoreApi.Infrastructure
             CreateMap<OrderDTO, OrderModel>().ReverseMap();
             CreateMap<ProductDTO, ProductModel>().ReverseMap();
             CreateMap<StatusDTO, StatusModel>().ReverseMap();
+			CreateMap<CustomerModel, CustomerDetailModel>().ReverseMap();
         }
     }
 }

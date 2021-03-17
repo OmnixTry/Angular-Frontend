@@ -1,23 +1,23 @@
 <h1>View Order</h1>
-<p>Order number: {{order?.id}}</p>
-<p>Customer: {{order?.customer?.name}}</p>
-<p>Status: {{order?.status}}</p>
-<p>Total Cost: {{order?.totalCost}}</p>
+<p>Order number: {{ order?.id }}</p>
+<p>Customer: {{ order?.customer?.name }}</p>
+<p>Status: {{ order?.status }}</p>
+<p>Total Cost: {{ order?.totalCost }}</p>
 <table class="table table-bordered">
-    <thead>
-        <td>Product Id</td>
-        <td>Product Name</td>
-        <td>Product Category</td>
-        <td>Quantity</td>
-        <td>Price</td>
-    </thead>
-    <tbody>
-        <tr *ngFor="let product of order?.products">
-            <td>{{product.id}}</td>
-            <td>{{product.productName}}</td>
-            <td>{{categoryService.getName(product.categoryId)}}</td>
-            <td>{{product.availableQuantity}}</td>
-            <td>{{product.price}}</td>
-        </tr>
-    </tbody>
+	<thead>
+		<td>Product Id</td>
+		<td>Product Name</td>
+		<td>Product Category</td>
+		<td>Quantity</td>
+		<td>Price</td>
+	</thead>
+	<tbody>
+		<tr *ngFor="let product of order?.products">
+			<td>{{ product.id }}</td>
+			<td>{{ product.productName }}</td>
+			<td>{{ product.category?.name }}</td>
+			<td>{{ product.availableQuantity }}</td>
+			<td>{{ product.price }}</td>
+		</tr>
+	</tbody>
 </table>

@@ -1,38 +1,97 @@
 <h1>Add Customer</h1>
 <form [formGroup]="newProductForm" (ngSubmit)="onSubmit()">
-    <label for="sss">Name</label>
-    <input type="text" name="productName" id="" formControlName="productName"> <br>
-    <span class="help-block" *ngIf="!newProductForm.get('productName')!.valid && newProductForm.get('productName')!.touched">Input Name</span>
-    
+	<label for="sss">Name</label>
+	<input type="text" name="productName" id="" formControlName="productName" />
+	<br />
+	<span
+		class="help-block"
+		*ngIf="
+			!newProductForm.get('productName')!.valid &&
+			newProductForm.get('productName')!.touched
+		"
+		>Input Name</span
+	>
 
-    <label for="sss">Category</label>
-    <select name="category"formControlName="category">
-        <option *ngFor="let category of categories; let indexOfelement=index;" value={{indexOfelement}}>{{category}}</option>
-    </select>
-    <br>
+	<label for="sss">Category</label>
+	<select name="category" formControlName="category">
+		<option *ngFor="let category of categories" value="{{ category.id }}">
+			{{ category.name }}
+		</option>
+	</select>
+	<span
+		class="help-block"
+		*ngIf="
+			newProductForm.get('category')?.errors?.required &&
+			newProductForm.get('category')?.touched
+		"
+		>Field is required</span
+	>
+	<br />
 
-    <label for="sss">Size</label>
-    <select name="size"formControlName="size">
-        <option *ngFor="let size of productService.getSizes()" value={{size}}>{{size}}</option>
-    </select>
-    <span class="help-block" *ngIf="newProductForm.get('size')?.errors?.required && newProductForm.get('size')?.touched">Field is required</span>
-    <br>
+	<label for="sss">Size</label>
+	<select name="size" formControlName="size">
+		<option *ngFor="let size of sizes" value="{{ size.id }}">
+			{{ size.title }}
+		</option>
+	</select>
+	<span
+		class="help-block"
+		*ngIf="
+			newProductForm.get('size')?.errors?.required &&
+			newProductForm.get('size')?.touched
+		"
+		>Field is required</span
+	>
+	<br />
 
-    <label for="sss" class="form-label">Quantity</label>
-    <input type="text" name="availableQuantity" id="" formControlName="availableQuantity"><br>
-    <span class="help-block" *ngIf="newProductForm.get('availableQuantity')?.errors?.required && newProductForm.get('availableQuantity')?.touched">Field is required</span>
-    <span class="help-block" *ngIf="newProductForm.get('availableQuantity')?.errors?.min">Incorrect Quantity</span>
+	<label for="sss" class="form-label">Quantity</label>
+	<input
+		type="text"
+		name="availableQuantity"
+		id=""
+		formControlName="availableQuantity"
+	/><br />
+	<span
+		class="help-block"
+		*ngIf="
+			newProductForm.get('availableQuantity')?.errors?.required &&
+			newProductForm.get('availableQuantity')?.touched
+		"
+		>Field is required</span
+	>
+	<span
+		class="help-block"
+		*ngIf="newProductForm.get('availableQuantity')?.errors?.min"
+		>Incorrect Quantity</span
+	>
 
+	<label for="sss">Price</label>
+	<input type="text" name="price" id="" formControlName="price" /><br />
+	<span
+		class="help-block"
+		*ngIf="
+			newProductForm.get('price')?.errors?.required &&
+			newProductForm.get('price')?.touched
+		"
+		>Field is required</span
+	>
+	<span class="help-block" *ngIf="newProductForm.get('price')?.errors?.min"
+		>Incorrect Quantity</span
+	>
 
-    <label for="sss">Price</label>
-    <input type="text" name="price" id="" formControlName="price"><br>
-    <span class="help-block" *ngIf="newProductForm.get('price')?.errors?.required && newProductForm.get('price')?.touched">Field is required</span>
-    <span class="help-block" *ngIf="newProductForm.get('price')?.errors?.min">Incorrect Quantity</span>
+	<label for="sss">Description</label>
+	<input
+		type="textBlock"
+		name="description"
+		id=""
+		formControlName="description"
+	/><br />
 
-    <label for="sss">Description</label>
-    <input type="textBlock" name="description" id="" formControlName="description"><br>
-    
-
-    <button class="btn btn-primary" type="submit" [disabled]="!newProductForm.valid">Add</button><br>
+	<button
+		class="btn btn-primary"
+		type="submit"
+		[disabled]="!newProductForm.valid"
+	>
+		Add</button
+	><br />
 </form>
-
