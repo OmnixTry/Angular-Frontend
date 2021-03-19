@@ -27,6 +27,7 @@ import { CategoryService } from './shared/services/category.service';
 import { SizeService } from './shared/services/size.service';
 import { StatusService } from './shared/services/status.service';
 import { EditOrderComponent } from './orders/edit-order/edit-order.component';
+import { EditOrderProductComponent } from './orders/edit-order-product/edit-order-product.component';
 
 const appRoutes: Routes = [
 	{ path: 'customer', component: CustomersComponent },
@@ -38,6 +39,7 @@ const appRoutes: Routes = [
 	{ path: 'order/add/:id', component: AddProductToOrderComponent },
 	{ path: 'order/:id', component: OrderViewComponent },
 	{ path: 'order/:id/edit', component: EditOrderComponent },
+	{ path: 'order/:id/edit/:productId', component: EditOrderProductComponent },
 ];
 
 @NgModule({
@@ -58,6 +60,7 @@ const appRoutes: Routes = [
 		AddProductToOrderComponent,
 		AddOrderComponent,
 		EditOrderComponent,
+		EditOrderProductComponent,
 	],
 	imports: [
 		BrowserModule,

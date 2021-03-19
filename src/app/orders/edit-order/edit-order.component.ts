@@ -38,7 +38,7 @@ export class EditOrderComponent implements OnInit {
 		private router: Router,
 		private activatedRoute: ActivatedRoute
 	) {
-		newOrderService.reset();
+		//newOrderService.reset();
 		this.orderId = <number>this.activatedRoute.snapshot.params['id'];
 
 		this.products = productService.products;
@@ -95,18 +95,19 @@ export class EditOrderComponent implements OnInit {
 				//totalCost: new FormControl(this.totalCost, [Validators.min(1)]),
 			});
 		});
-
-		orderService.getOrderProducts(this.orderId).subscribe((product) => {
-			for (let index = 0; index < product.length; index++) {
-				const element = product[index];
-				newOrderService.AddProduct({
-					productId: element.id,
-					quantity: element.availableQuantity,
-					price: element.availableQuantity * element.price,
-					name: element.productName,
-				});
-			}
-		});
+		if (newOrderService.products.length == 0) {
+			orderService.getOrderProducts(this.orderId).subscribe((product) => {
+				for (let index = 0; index < product.length; index++) {
+					const element = product[index];
+					newOrderService.AddProduct({
+						productId: element.id,
+						quantity: element.availableQuantity,
+						price: element.availableQuantity * element.price,
+						name: element.productName,
+					});
+				}
+			});
+		}
 	}
 	ngOnDestroy(): void {
 		this.newOrderService.order = this.generateOrder();
