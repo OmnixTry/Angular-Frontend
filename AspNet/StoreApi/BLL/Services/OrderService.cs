@@ -131,12 +131,14 @@ namespace BLL.Services
 
         
 
-        public void Create(OrderDTO toCreate)
+        public int Create(OrderDTO toCreate)
         {
             toCreate.Id = 0;
             toCreate.StatusId = 1;
-            _unitOfWork.OrderRepository.Insert(Map(toCreate));
+			Order newOrder = Map(toCreate);
+			_unitOfWork.OrderRepository.Insert(newOrder);
             _unitOfWork.Save();
+			return newOrder.Id;
         }
 
         public IEnumerable<OrderDTO> GetAll()
@@ -176,5 +178,34 @@ namespace BLL.Services
         {
             return _mapper.Map<Product, ProductDTO>(product);
         }
-    }
+
+		public void UpdateOrderProducts(int orderId, IEnumerable<OrderDetailDTO> orderDetails)
+		{
+			List<OrderDetail> oldDetails = _unitOfWork.OrderDetaiRepository.FindByOrderId(orderId);
+			List<int> newIds = orderDetails.Select(orderDetail => orderDetail.OrderId).ToList();
+			List<int> oldIds = oldDetails.Select(orderDetail => orderDetail.OrderId).ToList();
+			List<int> theSame = oldIds.Intersect(newIds).ToList();
+
+			foreach (var deleted in oldDetails.Where(orderDetail => !newIds.Contains(orderDetail.OrderId))){
+				_unitOfWork.OrderDetaiRepository.DeleteProductFromOrder(deleted.ProductId, orderId);
+				_unitOfWork.ProductRepository.GetById(deleted.ProductId).AvailableQuantity += deleted.Quantity;
+			}
+
+			foreach(var added in orderDetails.Where(orderDetail => !oldIds.Contains(orderDetail.OrderId)))
+			{
+				_unitOfWork.OrderDetaiRepository.AddProductToOrder(added.ProductId, orderId, added.Quantity);
+				_unitOfWork.ProductRepository.GetById(added.ProductId).AvailableQuantity -= added.Quantity;
+			}
+
+			foreach (var same in orderDetails.Where(orderDetail => !theSame.Contains(orderDetail.OrderId)))
+			{
+				OrderDetail detail = _unitOfWork.OrderDetaiRepository.FindByIds(same.ProductId, orderId);
+				int change = same.Quantity - detail.Quantity;
+				detail.Quantity = same.Quantity;
+				_unitOfWork.ProductRepository.GetById(same.ProductId).AvailableQuantity += change;
+			}
+
+			_unitOfWork.Save();
+		}
+	}
 }

@@ -8,7 +8,7 @@ export class Product {
 	availableQuantity: number;
 	price: number;
 	description?: string = '';
-	size: string;
+	size: number;
 	category: Category | null;
 
 	constructor(
@@ -19,7 +19,7 @@ export class Product {
 		availableQuantity: number,
 		price: number,
 		description: string,
-		size: string,
+		size: number,
 		category: Category | null
 	) {
 		this.id = id;

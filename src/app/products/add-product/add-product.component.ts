@@ -55,7 +55,7 @@ export class AddProductComponent implements OnInit {
 				+this.newProductForm.value['availableQuantity'],
 				+this.newProductForm.value['price'],
 				this.newProductForm.value['description'],
-				this.newProductForm.value['size']
+				+this.newProductForm.value['size']
 			)
 			.subscribe(() => {
 				this.router.navigate(['/product']);

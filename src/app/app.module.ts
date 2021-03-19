@@ -25,6 +25,8 @@ import { NewOrderService } from './shared/services/new-order.service';
 import { HttpClientModule } from '@angular/common/http';
 import { CategoryService } from './shared/services/category.service';
 import { SizeService } from './shared/services/size.service';
+import { StatusService } from './shared/services/status.service';
+import { EditOrderComponent } from './orders/edit-order/edit-order.component';
 
 const appRoutes: Routes = [
 	{ path: 'customer', component: CustomersComponent },
@@ -35,6 +37,7 @@ const appRoutes: Routes = [
 	{ path: 'order/add', component: AddOrderComponent },
 	{ path: 'order/add/:id', component: AddProductToOrderComponent },
 	{ path: 'order/:id', component: OrderViewComponent },
+	{ path: 'order/:id/edit', component: EditOrderComponent },
 ];
 
 @NgModule({
@@ -54,6 +57,7 @@ const appRoutes: Routes = [
 		OrderViewComponent,
 		AddProductToOrderComponent,
 		AddOrderComponent,
+		EditOrderComponent,
 	],
 	imports: [
 		BrowserModule,
@@ -70,6 +74,7 @@ const appRoutes: Routes = [
 		NewOrderService,
 		CategoryService,
 		SizeService,
+		StatusService,
 	],
 	bootstrap: [AppComponent],
 })

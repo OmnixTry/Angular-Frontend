@@ -18,6 +18,7 @@ namespace StoreApi.Infrastructure
             CreateMap<ProductDTO, ProductModel>().ReverseMap();
             CreateMap<StatusDTO, StatusModel>().ReverseMap();
 			CreateMap<CustomerModel, CustomerDetailModel>().ReverseMap();
-        }
+			CreateMap<OrderDetailDTO, OrderDetailModel>().ReverseMap();
+		}
     }
 }

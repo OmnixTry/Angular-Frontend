@@ -28,7 +28,7 @@ namespace DAL.Repositories
             return _entities.ToList();
         }
 
-        public TEntity GetById(int id)
+        public virtual TEntity GetById(int id)
         {
             return _entities.Find(id);
         }

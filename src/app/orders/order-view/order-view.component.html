@@ -2,7 +2,7 @@
 <p>Order number: {{ order?.id }}</p>
 <p>Customer: {{ order?.customer?.name }}</p>
 <p>Status: {{ order?.status }}</p>
-<p>Total Cost: {{ order?.totalCost }}</p>
+<p>Total Cost: {{ totalCost }}</p>
 <table class="table table-bordered">
 	<thead>
 		<td>Product Id</td>
@@ -12,7 +12,7 @@
 		<td>Price</td>
 	</thead>
 	<tbody>
-		<tr *ngFor="let product of order?.products">
+		<tr *ngFor="let product of products">
 			<td>{{ product.id }}</td>
 			<td>{{ product.productName }}</td>
 			<td>{{ product.category?.name }}</td>

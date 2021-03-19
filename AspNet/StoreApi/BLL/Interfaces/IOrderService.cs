@@ -1,15 +1,17 @@
-﻿using BLL.DTO;
+using BLL.DTO;
 using System;
 using System.Collections.Generic;
 using System.Text;
 
 namespace BLL.Interfaces
 {
-    public interface IOrderService : ICreateable<OrderDTO>, IGetable<OrderDTO> , IDeleteable, IUpdatable<OrderDTO>
+    public interface IOrderService : ICreateableId<OrderDTO>, IGetable<OrderDTO> , IDeleteable, IUpdatable<OrderDTO>
     {
         IEnumerable<ProductDTO> GetOrderProducts(int orderId);
 
         void AddProductToOrder(int orderIdint, int productId, int quantity);
+
+		void UpdateOrderProducts(int orderId, IEnumerable<OrderDetailDTO> orderDetails);
 
         void RemoveProductFromOrder(int orderid, int productId);
 

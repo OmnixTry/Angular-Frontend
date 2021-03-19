@@ -1,10 +1,11 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using AutoMapper;
 using BLL.DTO;
 using BLL.Interfaces;
+using Microsoft.AspNetCore.Cors;
 using Microsoft.AspNetCore.Mvc;
 using StoreApi.Models;
 
@@ -12,9 +13,10 @@ using StoreApi.Models;
 
 namespace StoreApi.Controllers
 {
-    [Route("api/[controller]")]
-    [ApiController]
-    public class OrderController : ControllerBase
+	[EnableCors("AllowOrigin")]
+	[Route("api/[controller]")]
+	[ApiController]
+	public class OrderController : ControllerBase
     {
         private IMapper _mapper;
         private IOrderService _orderService;
@@ -63,8 +65,7 @@ namespace StoreApi.Controllers
             if (!customerIds.Contains(value.CustomerId))
                 return BadRequest("No such Customer");
 
-            _orderService.Create(Map(value));
-            return Ok();
+            return Ok(_orderService.Create(Map(value)));
         }
 
         // PUT api/<OrderController>/5
@@ -87,20 +88,34 @@ namespace StoreApi.Controllers
             return Map(_orderService.GetOrderProducts(id));
         }
 
-        [HttpPost("{id}/products/")]
-        public IActionResult PostOrders(int id, int productId, int quantity)
+		[HttpPost("{id}/products/")]
+		public IActionResult PostOrders(int id, [FromBody] OrderDetailModel[] orderDetails)
         {
-            // validation
-            if (quantity <= 0)
-                return BadRequest("Quantity has to me more than 0");
-            if (Map(_productService.GetById(productId)).AvailableQuantity < quantity)
-                return BadRequest("Not Enough items in stock");
+			// validation
+			foreach (OrderDetailModel orderDetail in orderDetails)
+			{
+				if (orderDetail.Quantity <= 0)
+					return BadRequest("Quantity has to me more than 0");
+				if (Map(_productService.GetById(orderDetail.ProductId)).AvailableQuantity < orderDetail.Quantity)
+					return BadRequest("Not Enough items in stock");
+
+				_orderService.AddProductToOrder(id, orderDetail.ProductId, orderDetail.Quantity);
+			}
             
-            _orderService.AddProductToOrder(id, productId, quantity);
             return Ok();
         }
 
-        [HttpGet("{id}/products/{productId}")]
+		[HttpPut("{id}/products/")]
+		public IActionResult ChangeProducts(int id, [FromBody] OrderDetailModel[] orderDetails)
+		{
+			// validation
+			_orderService.UpdateOrderProducts(id, _mapper.Map<IEnumerable<OrderDetailModel>, IEnumerable<OrderDetailDTO>>(orderDetails));
+		
+
+			return Ok();
+		}
+
+		[HttpGet("{id}/products/{productId}")]
         public ProductModel GetProduct(int id, int productId)
         {
             return Map(_orderService.GetOrderProduct(id, productId));

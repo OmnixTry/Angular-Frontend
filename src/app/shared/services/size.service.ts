@@ -1,3 +1,4 @@
+import { SafeMethodCall } from '@angular/compiler';
 import { Size } from '../models/size.model';
 
 export class SizeService {
@@ -9,5 +10,18 @@ export class SizeService {
 
 	getAll() {
 		return this.sizes;
+	}
+
+	translate(id: number): string {
+		switch (id) {
+			case 1:
+				return 'Small';
+			case 2:
+				return 'Medium';
+			case 3:
+				return 'Large';
+			default:
+				return '';
+		}
 	}
 }

@@ -37,26 +37,30 @@ INSERT INTO [dbo].[Products]
            ,[Price]
            ,[CreationDate]
            ,[Description]
-           ,[CategoryId])
+           ,[CategoryId]
+					 ,[Size])
      VALUES
            ('Pepsi'
            ,1000
            ,10
            ,GETDATE()
            ,'Nice Drincc'
-           ,2),
+           ,2
+					 ,1),
            ('Sproot'
            ,2000
            ,15
            ,GETDATE()
            ,'Nice Drincc Too'
-           ,2),
+           ,2
+					 ,2),
            ('Onion'
            ,500
            ,5
            ,GETDATE()
            ,'Bitter Vegetable'
-           ,1)
+           ,1
+					 ,3)
 GO
 
 USE [Store]
@@ -70,11 +74,11 @@ INSERT INTO [dbo].[Orders]
      VALUES
            ('Make Fast'
            ,1
-           ,5 
+           ,1 
            ,GETDATE()),
            ('No'
            ,1
-           ,6 
+           ,2 
            ,GETDATE())
 
 GO
@@ -87,14 +91,14 @@ INSERT INTO [dbo].[OrderDetails]
            ,[OrderId]
            ,[Quantity])
      VALUES
-           (1 --<ProductId, int,>
-           ,3 --<OrderId, int,>
-           ,10), --<Quantity, int,>)
            (2 --<ProductId, int,>
-           ,3 --<OrderId, int,>
-           ,20), --<Quantity, int,>)
+           ,2 --<OrderId, int,>
+           ,10), --<Quantity, int,>)
            (3 --<ProductId, int,>
-           ,4 --<OrderId, int,>
+           ,2 --<OrderId, int,>
+           ,20), --<Quantity, int,>)
+           (4 --<ProductId, int,>
+           ,2 --<OrderId, int,>
            ,50) --<Quantity, int,>)
 GO
 

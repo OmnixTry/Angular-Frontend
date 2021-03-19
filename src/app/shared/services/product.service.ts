@@ -27,7 +27,7 @@ export class ProductService {
 		availableQuantity: number,
 		price: number,
 		description: string,
-		size: string
+		size: number
 	) {
 		var date = this.datePipe.transform(new Date(), 'yyyy-MM-dd');
 		var newProduct: Product = new Product(

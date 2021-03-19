@@ -1,10 +1,9 @@
+using DAL.Entities;
 using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace BLL.DTO
 {
-    public class ProductDTO
+	public class ProductDTO
     {
         public int Id { get; set; }
 
@@ -21,5 +20,7 @@ namespace BLL.DTO
         public int? CategoryId { get; set; }
 
         public string Category { get; set; }
+
+		public Size Size { get; set; }
 	}
 }

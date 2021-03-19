@@ -9,29 +9,34 @@ using System.Text;
 
 namespace DAL.Repositories
 {
-    class OrderRepository : GenericEFRepository<Order>, IOrderRepository
-    {
-        public OrderRepository(StoreContext context) : base(context)
-        {
-        }
+	class OrderRepository : GenericEFRepository<Order>, IOrderRepository
+	{
+		public OrderRepository(StoreContext context) : base(context)
+		{
+		}
 
-    public int CountTotalCost(int customerId)
-    {
-      var a = (from product in _context.Products
-               join detail in _context.OrderDetails on product.Id equals detail.ProductId
-               join order in _context.Orders on detail.OrderId equals order.Id
-               where customerId == order.CustomerId
-               select product.Price * detail.Quantity).ToList();
-      return (from product in _context.Products
-              join detail in _context.OrderDetails on product.Id equals detail.ProductId
-              join order in _context.Orders on detail.OrderId equals order.Id
-              where customerId == order.CustomerId
-              select product.Price * detail.Quantity).Sum();
-    }
+		public int CountTotalCost(int customerId)
+		{
+			var a = (from product in _context.Products
+					 join detail in _context.OrderDetails on product.Id equals detail.ProductId
+					 join order in _context.Orders on detail.OrderId equals order.Id
+					 where customerId == order.CustomerId
+					 select product.Price * detail.Quantity).ToList();
+			return (from product in _context.Products
+					join detail in _context.OrderDetails on product.Id equals detail.ProductId
+					join order in _context.Orders on detail.OrderId equals order.Id
+					where customerId == order.CustomerId
+					select product.Price * detail.Quantity).Sum();
+		}
 
-    public override List<Order> FindAll()
-        {
-            return _context.Orders.Include(ord => ord.Status).Include(ord=> ord.Customer).ToList();
-        }
-  }
+		public override List<Order> FindAll()
+		{
+			return _context.Orders.Include(ord => ord.Status).Include(ord => ord.Customer).ToList();
+		}
+
+		public override Order GetById(int id)
+		{
+			return _entities.Include(order => order.Customer).Include(order => order.Status).Where(order => order.Id == id).FirstOrDefault();
+		}
+	}
 }

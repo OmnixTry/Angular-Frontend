@@ -1,3 +1,4 @@
+using DAL.Entities;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -22,5 +23,7 @@ namespace StoreApi.Models
         public int? CategoryId { get; set; }
 
         public string Category { get; set; }
+
+		public Size Size { get; set; }
     }
 }

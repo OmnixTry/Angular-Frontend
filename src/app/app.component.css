@@ -1,9 +1,10 @@
-.mainContainer{
-    padding: 50px;
+.mainContainer {
+	padding: 50px;
+	padding-top: 0;
 }
 
-#innerContainer{
-    border: solid black 1px;
-    border-radius: 10px;
-    padding: 20px;
+#innerContainer {
+	border: solid black 1px;
+	border-radius: 10px;
+	padding: 20px;
 }

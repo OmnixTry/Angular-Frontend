@@ -1,7 +1,7 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { httpFactory } from '@angular/http/src/http_module';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Customer } from 'src/app/shared/models/customer.model';
 import { IOrderDetail } from 'src/app/shared/models/IOrderDetail.model';
 import { Order } from 'src/app/shared/models/order.model';
@@ -16,11 +16,13 @@ import { StatusService } from 'src/app/shared/services/status.service';
 import { OrdersComponent } from '../orders.component';
 
 @Component({
-	selector: 'app-add-order',
-	templateUrl: './add-order.component.html',
-	styleUrls: ['./add-order.component.css'],
+	selector: 'app-edit-order',
+	templateUrl: './edit-order.component.html',
+	styleUrls: ['./edit-order.component.css'],
 })
-export class AddOrderComponent implements OnInit, OnDestroy {
+export class EditOrderComponent implements OnInit {
+	orderId: number;
+
 	addOrderForm: FormGroup;
 	products: Product[];
 	customers: Customer[] = [];
@@ -33,8 +35,12 @@ export class AddOrderComponent implements OnInit, OnDestroy {
 		public productService: ProductService,
 		public sizeService: SizeService,
 		public statusService: StatusService,
-		private router: Router
+		private router: Router,
+		private activatedRoute: ActivatedRoute
 	) {
+		newOrderService.reset();
+		this.orderId = <number>this.activatedRoute.snapshot.params['id'];
+
 		this.products = productService.products;
 
 		this.statusService
@@ -43,7 +49,7 @@ export class AddOrderComponent implements OnInit, OnDestroy {
 
 		this.addOrderForm = new FormGroup({
 			createdDate: new FormControl(
-				newOrderService.order ? newOrderService.order.createdDate : new Date()
+				newOrderService.order ? newOrderService.order.createdDate : null
 			),
 			customerId: new FormControl(
 				newOrderService.order ? newOrderService.order.customerId : null,
@@ -62,6 +68,45 @@ export class AddOrderComponent implements OnInit, OnDestroy {
 		customerService.customers.subscribe(
 			(customers) => (this.customers = customers)
 		);
+
+		this.orderService.getOrderById(this.orderId).subscribe((order) => {
+			newOrderService.order = order;
+			this.addOrderForm.value['status'] = newOrderService.order.status;
+			this.addOrderForm.value['createdDate'] =
+				newOrderService.order.createdDate;
+			this.addOrderForm.value['customerId'] = newOrderService.order.customerId;
+			this.addOrderForm.value['comment'] = newOrderService.order.comment;
+
+			this.addOrderForm = new FormGroup({
+				createdDate: new FormControl(
+					newOrderService.order ? newOrderService.order.createdDate : null
+				),
+				customerId: new FormControl(
+					newOrderService.order ? newOrderService.order.customerId : null,
+					[Validators.required]
+				),
+				status: new FormControl(
+					newOrderService.order ? newOrderService.order.statusId : null,
+					[Validators.required]
+				),
+				comment: new FormControl(
+					newOrderService.order ? newOrderService.order.comment : null
+				),
+				//totalCost: new FormControl(this.totalCost, [Validators.min(1)]),
+			});
+		});
+
+		orderService.getOrderProducts(this.orderId).subscribe((product) => {
+			for (let index = 0; index < product.length; index++) {
+				const element = product[index];
+				newOrderService.AddProduct({
+					productId: element.id,
+					quantity: element.availableQuantity,
+					price: element.availableQuantity * element.price,
+					name: element.productName,
+				});
+			}
+		});
 	}
 	ngOnDestroy(): void {
 		this.newOrderService.order = this.generateOrder();
@@ -74,7 +119,7 @@ export class AddOrderComponent implements OnInit, OnDestroy {
 			0,
 			new Date(),
 			null,
-			this.addOrderForm.value['status'],
+			(+this.addOrderForm.value['status']).toString(),
 			+this.addOrderForm.value['status'],
 			this.newOrderService.totalCost,
 			[],
@@ -85,10 +130,11 @@ export class AddOrderComponent implements OnInit, OnDestroy {
 
 	onSubmit() {
 		const newOrder = this.generateOrder() as Order;
+		newOrder.id = +this.orderId;
 		console.log(newOrder);
-		this.orderService.addOrder(newOrder).subscribe((newId) => {
+		this.orderService.updateOrder(newOrder).subscribe((newId) => {
 			this.orderService
-				.addProductsToOrder(newId, this.newOrderService.products)
+				.updateOrderProducts(this.orderId, this.newOrderService.products)
 				.subscribe();
 
 			this.newOrderService.reset();
